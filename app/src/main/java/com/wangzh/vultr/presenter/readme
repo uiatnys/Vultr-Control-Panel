@@ -1,0 +1,1 @@
+presenter层：Presenters 订阅（subscibe） RxJava的Observables，负责处理订阅周期，数据处理，并调用View层中的相应方法展示数据。

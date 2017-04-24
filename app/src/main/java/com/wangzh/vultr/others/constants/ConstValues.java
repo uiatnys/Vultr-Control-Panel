@@ -7,5 +7,5 @@ package com.wangzh.vultr.others.constants;
 public class ConstValues {
 
     //url前缀
-    final String URL_BASE = "https://api.vultr.com/";
+    public static final String URL_BASE = "https://api.vultr.com";
 }
