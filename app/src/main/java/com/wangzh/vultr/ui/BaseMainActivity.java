@@ -33,12 +33,14 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     NavigationView navigationView;
 
     protected AlertDialogBuilder mAlertDialogBuilder;
+    protected MainPresenter mMainPresenter;
 
-    protected abstract void init();
+    protected abstract void initContent();
 
     @Override
     protected void initView() {
-        init();
+        initContent();
+        presenter = createPresenter();
     }
 
     @Override

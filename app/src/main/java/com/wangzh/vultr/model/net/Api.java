@@ -14,6 +14,9 @@ import rx.Observable;
 
 public interface Api {
 
+    //url前缀
+    static final String URL_BASE = "https://api.vultr.com";
+
     /**
      * 获取账户费用信息
      * @return

@@ -1,7 +1,6 @@
 package com.wangzh.vultr.model.net;
 
 import com.wangzh.vultr.BuildConfig;
-import com.wangzh.vultr.others.constants.ConstValues;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +33,7 @@ public class Request {
                     .retryOnConnectionFailure(true);
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl(ConstValues.URL_BASE)
+                    .baseUrl(Api.URL_BASE)
                     .addConverterFactory(FastJsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(okHttpClient)

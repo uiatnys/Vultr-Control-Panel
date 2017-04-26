@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
 
 import butterknife.ButterKnife;
@@ -12,7 +14,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseMainActivity implements AlertDialogBuilder.AlertDialogOkClickListener{
 
     @Override
-    protected void init() {
+    protected void initContent() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -34,6 +36,7 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     @Override
     protected void onResume() {
         super.onResume();
+        mMainPresenter = (MainPresenter) presenter;
         mAlertDialogBuilder.createDialogStyleA(this,"ApiKey Check", R.layout.edt_dialoginput).show();
     }
 
@@ -44,6 +47,11 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onOkBtnClicked(String value) {
+        mMainPresenter.getAccountInfoByKey(value);
+    }
+
+    @Override
+    public void onCheckApiKeySuccess(AccountInfoDTO dto) {
 
     }
 }

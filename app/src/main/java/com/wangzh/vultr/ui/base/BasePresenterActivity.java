@@ -15,9 +15,7 @@ public abstract class BasePresenterActivity<P extends BasePresenter> extends Bas
 
     @Override
     protected void init() {
-        presenter = createPresenter();
         initView();
-
     }
 
     @Override

@@ -26,6 +26,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
     protected void initView() {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        presenter = createPresenter();
     }
 
     @Override
