@@ -1,6 +1,8 @@
 package com.wangzh.vultr.model.net;
 
 import com.wangzh.vultr.BuildConfig;
+import com.wangzh.vultr.app.MainApplication;
+import com.wangzh.vultr.others.utils.SslUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +23,6 @@ public class Request {
     public static Retrofit retrofit() {
         if (mRetrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
             if (BuildConfig.DEBUG) {
                 // Log信息拦截器
                 HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -30,7 +31,8 @@ public class Request {
                 builder.addInterceptor(loggingInterceptor);
             }
             builder.connectTimeout(10, TimeUnit.SECONDS)
-                    .retryOnConnectionFailure(true);
+                    .retryOnConnectionFailure(true)
+                    .sslSocketFactory(new SslUtils().getSafeSslSocketFactory(MainApplication.getAppContext()));
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(Api.URL_BASE)
