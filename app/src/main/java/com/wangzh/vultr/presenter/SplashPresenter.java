@@ -13,6 +13,9 @@ public class SplashPresenter extends BasePresenter<SplashViewI> {
         attachView(splashViewI);
     }
 
+    /**
+     * 测试服务器连通性，无法使用
+     */
     public void checkVultrServer(){
         addSubscribe(mApi.checkVlutrServer(), new CallBack() {
             @Override

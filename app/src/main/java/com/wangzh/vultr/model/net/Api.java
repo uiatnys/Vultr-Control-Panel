@@ -1,6 +1,7 @@
 package com.wangzh.vultr.model.net;
 
-import com.wangzh.vultr.model.entity.AccountInfo;
+import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.CheckServerDTO;
 
 import retrofit2.Response;
 import retrofit2.http.GET;
@@ -18,8 +19,12 @@ public interface Api {
      * @return
      */
     @GET("v1/account/info")
-    Observable<AccountInfo> getAccountInfo(@Query("api_key") String apiKey);
+    Observable<AccountInfoDTO> getAccountInfo(@Query("api_key") String apiKey);
 
+    /**
+     * 确认服务器连通性，无法使用
+     * @return
+     */
     @GET(".")
-    Observable<Response> checkVlutrServer();
+    Observable<Response<CheckServerDTO>> checkVlutrServer();
 }

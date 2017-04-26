@@ -1,7 +1,9 @@
 package com.wangzh.vultr.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.view.View;
 
 import com.wangzh.vultr.R;
@@ -35,8 +37,13 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         super.onResume();
-        mSplashPresenter = (SplashPresenter) presenter;
-        mSplashPresenter.checkVultrServer();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
+            }
+        },1000);
     }
 
     @Override
