@@ -44,6 +44,7 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
             mAlertDialog.show();
         }else {
             this.mAccountInfoDTO = (AccountInfoDTO) getIntent().getSerializableExtra("dto");
+            //TODO getAuthInfo
         }
     }
 
@@ -72,5 +73,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
         mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
         this.mAccountInfoDTO = dto;
+        //TODO getAuthInfo
     }
 }

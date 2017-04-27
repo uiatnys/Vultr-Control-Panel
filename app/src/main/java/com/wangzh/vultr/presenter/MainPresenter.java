@@ -1,6 +1,7 @@
 package com.wangzh.vultr.presenter;
 
         import com.wangzh.vultr.model.entity.AccountInfoDTO;
+        import com.wangzh.vultr.model.entity.AuthInfoDTO;
         import com.wangzh.vultr.model.entity.HttpErrorVo;
         import com.wangzh.vultr.model.net.CallBack;
         import com.wangzh.vultr.presenter.i.MainViewI;
@@ -30,6 +31,25 @@ public class MainPresenter extends BasePresenter<MainViewI> {
             @Override
             public void onFinish() {
                 view.onFinish();
+            }
+        });
+    }
+
+    public void getAuthInfo(String apiKey){
+        addSubscribe(mApi.getAuthInfo(apiKey), new CallBack<AuthInfoDTO>() {
+            @Override
+            public void onSuccess(AuthInfoDTO o) {
+
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
             }
         });
     }
