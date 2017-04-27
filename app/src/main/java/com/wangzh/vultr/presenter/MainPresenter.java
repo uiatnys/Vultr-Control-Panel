@@ -1,6 +1,7 @@
 package com.wangzh.vultr.presenter;
 
         import com.wangzh.vultr.model.entity.AccountInfoDTO;
+        import com.wangzh.vultr.model.entity.HttpErrorVo;
         import com.wangzh.vultr.model.net.CallBack;
         import com.wangzh.vultr.presenter.i.MainViewI;
 
@@ -22,7 +23,7 @@ public class MainPresenter extends BasePresenter<MainViewI> {
             }
 
             @Override
-            public void onFail(String msg) {
+            public void onFail(HttpErrorVo msg) {
                 view.getDataFail(msg);
             }
 

@@ -3,15 +3,21 @@ package com.wangzh.vultr.ui;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.others.constants.SPConst;
+import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
 
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseMainActivity implements AlertDialogBuilder.AlertDialogOkClickListener{
+
+    private String API_KEY ="";
 
     @Override
     protected void initContent() {
@@ -31,27 +37,40 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         mAlertDialogBuilder = new AlertDialogBuilder(this);
+        presenter = createPresenter();
+        mMainPresenter = (MainPresenter) presenter;
+        if (getIntent().getFlags() == 0){
+            mAlertDialog = mAlertDialogBuilder.createDialogStyleA(this,"ApiKey Check", R.layout.edt_dialoginput);
+            mAlertDialog.show();
+        }else {
+            this.mAccountInfoDTO = (AccountInfoDTO) getIntent().getSerializableExtra("dto");
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mMainPresenter = (MainPresenter) presenter;
-        mAlertDialogBuilder.createDialogStyleA(this,"ApiKey Check", R.layout.edt_dialoginput).show();
     }
 
     @Override
-    public void getDataFail(String failMsg) {
-
+    public void getDataFail(HttpErrorVo failMsg) {
+        mSPUtils.put(SPConst.SP_APIKEY,"");
+        if (HttpResponseUtil.getCodeMap().containsKey(failMsg.getCode())){
+            ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("StatusCode-"+failMsg.getCode()+"-Please Check Apikey Correct");
+        }else {
+            ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("Maybe SomeThing Wrong,Please Feedback Me!");
+        }
     }
 
     @Override
     public void onOkBtnClicked(String value) {
+        this.API_KEY = value;
         mMainPresenter.getAccountInfoByKey(value);
     }
 
     @Override
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
-
+        mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
+        this.mAccountInfoDTO = dto;
     }
 }

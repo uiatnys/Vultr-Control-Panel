@@ -1,6 +1,9 @@
 package com.wangzh.vultr.model.net;
 
 
+import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.others.constants.ConstValues;
+
 import retrofit2.HttpException;
 import rx.Subscriber;
 
@@ -13,7 +16,7 @@ import rx.Subscriber;
 public abstract class CallBack<Model> extends Subscriber<Model> {
 
     public abstract void onSuccess(Model model);
-    public abstract void onFail(String msg);
+    public abstract void onFail(HttpErrorVo msg);
     public abstract void onFinish();
 
     @Override
@@ -24,12 +27,17 @@ public abstract class CallBack<Model> extends Subscriber<Model> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
+        HttpErrorVo vo = new HttpErrorVo();
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            String msg = httpException.getMessage();;
-            onFail(msg);
+            vo.setCode(httpException.code());
+            vo.setMessage(httpException.message());
+            String msg = httpException.getMessage();
+            onFail(vo);
         } else {
-            onFail(e.getMessage());
+            vo.setCode(ConstValues.ERROR_NONHTTP);
+            vo.setMessage(e.getMessage());
+            onFail(vo);
         }
         onFinish();
     }

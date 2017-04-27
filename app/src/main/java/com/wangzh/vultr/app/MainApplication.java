@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.blankj.utilcode.util.Utils;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 /**
@@ -19,6 +20,7 @@ public class MainApplication extends Application {
         super.onCreate();
         mApplication = this;
         Utils.init(getApplicationContext());
+        CrashReport.initCrashReport(getApplicationContext(), "f2ef6e3ee0", true);
     }
 
     public static Context getAppContext(){

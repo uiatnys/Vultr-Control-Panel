@@ -6,5 +6,7 @@ package com.wangzh.vultr.others.constants;
 
 public class ConstValues {
 
+    //callback中非httpexception的code处理
+    public static final int ERROR_NONHTTP = -1;
 
 }

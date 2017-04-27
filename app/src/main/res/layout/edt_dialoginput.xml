@@ -4,6 +4,8 @@
           android:layout_marginLeft="20dp"
           android:layout_marginRight="20dp"
           android:lines="1"
+          android:textSize="13dp"
+          android:inputType="textUri"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
     android:hint="@string/string_input_apikey">

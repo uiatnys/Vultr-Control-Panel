@@ -1,5 +1,7 @@
 package com.wangzh.vultr.presenter;
 
+import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.model.net.CallBack;
 import com.wangzh.vultr.presenter.i.SplashViewI;
 
@@ -13,18 +15,16 @@ public class SplashPresenter extends BasePresenter<SplashViewI> {
         attachView(splashViewI);
     }
 
-    /**
-     * 测试服务器连通性，无法使用
-     */
-    public void checkVultrServer(){
-        addSubscribe(mApi.checkVlutrServer(), new CallBack() {
+
+    public void getAccountInfoByKey(String apiKey){
+        addSubscribe(mApi.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>() {
             @Override
-            public void onSuccess(Object o) {
-                view.connectVultrSuccess();
+            public void onSuccess(AccountInfoDTO o) {
+                view.onCheckApiKeySuccess(o);
             }
 
             @Override
-            public void onFail(String msg) {
+            public void onFail(HttpErrorVo msg) {
                 view.getDataFail(msg);
             }
 

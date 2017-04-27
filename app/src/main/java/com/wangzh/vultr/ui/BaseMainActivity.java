@@ -4,11 +4,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.i.MainViewI;
@@ -33,24 +35,21 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     NavigationView navigationView;
 
     protected AlertDialogBuilder mAlertDialogBuilder;
+    protected AlertDialog mAlertDialog;
     protected MainPresenter mMainPresenter;
+    protected AccountInfoDTO mAccountInfoDTO;
+
 
     protected abstract void initContent();
 
     @Override
     protected void initView() {
         initContent();
-        presenter = createPresenter();
     }
 
     @Override
     protected BasePresenter createPresenter() {
         return new MainPresenter(this);
-    }
-
-    @Override
-    public void getDataFail(String failMsg) {
-
     }
 
     @Override

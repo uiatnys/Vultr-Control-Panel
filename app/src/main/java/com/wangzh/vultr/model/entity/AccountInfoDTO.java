@@ -1,12 +1,14 @@
 package com.wangzh.vultr.model.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by WangZH on 2017/4/24.
  */
 
-public class AccountInfoDTO {
+public class AccountInfoDTO implements Serializable{
 
-
+    private static final long serialVersionUID = 7526472295622776147L;
     /**
      * balance : -7.94  余额
      * pending_charges : 2.20  预计费用
@@ -20,7 +22,7 @@ public class AccountInfoDTO {
     private String last_payment_amount;
 
     public String getBalance() {
-        return balance;
+        return String.valueOf(Math.abs(Float.parseFloat(balance)));
     }
 
     public void setBalance(String balance) {
@@ -28,7 +30,7 @@ public class AccountInfoDTO {
     }
 
     public String getPending_charges() {
-        return pending_charges;
+        return String.valueOf(Math.abs(Float.parseFloat(pending_charges)));
     }
 
     public void setPending_charges(String pending_charges) {
@@ -44,7 +46,7 @@ public class AccountInfoDTO {
     }
 
     public String getLast_payment_amount() {
-        return last_payment_amount;
+        return String.valueOf(Double.parseDouble(last_payment_amount)*-1f);
     }
 
     public void setLast_payment_amount(String last_payment_amount) {

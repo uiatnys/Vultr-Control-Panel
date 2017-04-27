@@ -6,7 +6,11 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.View;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.SplashPresenter;
 import com.wangzh.vultr.presenter.i.SplashViewI;
@@ -21,12 +25,19 @@ import butterknife.ButterKnife;
 public class SplashActivity extends BasePresenterActivity implements SplashViewI {
 
     private SplashPresenter mSplashPresenter;
+    private Intent mIntent;
+    private static final int FLAG_NEEDINPUTKEY = 0;
+    private static final int FLAG_CHECKKEYSUCCESS = 1;
+    private String API_KEY ="";
+
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         presenter = createPresenter();
+        mSplashPresenter = (SplashPresenter) presenter;
+        mIntent = new Intent(SplashActivity.this,MainActivity.class);
     }
 
     @Override
@@ -38,13 +49,19 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                finish();
-            }
-        },1000);
+        API_KEY = mSPUtils.getString(SPConst.SP_APIKEY);
+        if (!StringUtils.isEmpty(API_KEY)){
+            mSplashPresenter.getAccountInfoByKey(API_KEY);
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mIntent.setFlags(FLAG_NEEDINPUTKEY);
+                    startActivity(mIntent);
+                    finish();
+                }
+            },1000);
+        }
     }
 
     @Override
@@ -53,11 +70,17 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
     }
 
     @Override
-    public void connectVultrSuccess() {
+    public void getDataFail(HttpErrorVo failMsg) {
+        mIntent.setFlags(FLAG_NEEDINPUTKEY);
+        startActivity(mIntent);
+        finish();
     }
 
     @Override
-    public void getDataFail(String failMsg) {
-
+    public void onCheckApiKeySuccess(AccountInfoDTO dto) {
+        mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
+        mIntent.setFlags(FLAG_CHECKKEYSUCCESS).putExtra("dto",dto);
+        startActivity(mIntent);
+        finish();
     }
 }
