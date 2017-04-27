@@ -2,9 +2,12 @@ package com.wangzh.vultr.model.net;
 
 import com.wangzh.vultr.BuildConfig;
 import com.wangzh.vultr.app.MainApplication;
-import com.wangzh.vultr.others.utils.SslUtils;
+import com.wangzh.vultr.others.utils.SslCustomTrust;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +35,13 @@ public class Request {
             }
             builder.connectTimeout(10, TimeUnit.SECONDS)
                     .retryOnConnectionFailure(true)
-                    .sslSocketFactory(new SslUtils().getSafeSslSocketFactory(MainApplication.getAppContext()));
+                    .sslSocketFactory(new SslCustomTrust(MainApplication.getAppContext()).getSslSocketFactory())
+                    .hostnameVerifier(new HostnameVerifier() {
+                        @Override
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    });
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(Api.URL_BASE)
