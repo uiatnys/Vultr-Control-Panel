@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.utils.HttpResponseUtil;
@@ -19,8 +20,16 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     private String API_KEY ="";
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     @Override
     protected void initContent() {
+        //activity跳转动画，存在bug
+        //setTransition(android.R.transition.fade,android.R.transition.fade,android.R.transition.fade);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -44,13 +53,8 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
             mAlertDialog.show();
         }else {
             this.mAccountInfoDTO = (AccountInfoDTO) getIntent().getSerializableExtra("dto");
-            //TODO getAuthInfo
+            getAuthInfo();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -63,6 +67,10 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         }
     }
 
+    private void getAuthInfo(){
+     mMainPresenter.getAuthInfo(mSPUtils.getString(SPConst.SP_APIKEY));
+    }
+
     @Override
     public void onOkBtnClicked(String value) {
         this.API_KEY = value;
@@ -71,8 +79,14 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
+        mAlertDialog.dismiss();
         mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
         this.mAccountInfoDTO = dto;
-        //TODO getAuthInfo
+        getAuthInfo();
+    }
+
+    @Override
+    public void onGetAuthInfoSuccess(AuthInfoDTO dto) {
+        this.mAuthInfoDTO = dto;
     }
 }

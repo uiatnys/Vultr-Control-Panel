@@ -39,17 +39,17 @@ public class MainPresenter extends BasePresenter<MainViewI> {
         addSubscribe(mApi.getAuthInfo(apiKey), new CallBack<AuthInfoDTO>() {
             @Override
             public void onSuccess(AuthInfoDTO o) {
-
+                view.onGetAuthInfoSuccess(o);
             }
 
             @Override
             public void onFail(HttpErrorVo msg) {
-
+                view.getDataFail(msg);
             }
 
             @Override
             public void onFinish() {
-
+                view.onFinish();
             }
         });
     }

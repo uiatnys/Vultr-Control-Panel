@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
+import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.i.MainViewI;
@@ -38,6 +39,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     protected AlertDialog mAlertDialog;
     protected MainPresenter mMainPresenter;
     protected AccountInfoDTO mAccountInfoDTO;
+    protected AuthInfoDTO mAuthInfoDTO;
 
 
     protected abstract void initContent();
@@ -76,23 +78,21 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()){
+            case  R.id.nav_account:
+                break;
+            case  R.id.nav_gallery:
+                break;
+            case  R.id.nav_slideshow:
+                break;
+            case  R.id.nav_manage:
+                break;
+            case  R.id.nav_feedback:
+                break;
+            case  R.id.nav_send:
+                break;
+            default:break;
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

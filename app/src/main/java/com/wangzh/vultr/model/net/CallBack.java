@@ -32,7 +32,6 @@ public abstract class CallBack<Model> extends Subscriber<Model> {
             HttpException httpException = (HttpException) e;
             vo.setCode(httpException.code());
             vo.setMessage(httpException.message());
-            String msg = httpException.getMessage();
             onFail(vo);
         } else {
             vo.setCode(ConstValues.ERROR_NONHTTP);

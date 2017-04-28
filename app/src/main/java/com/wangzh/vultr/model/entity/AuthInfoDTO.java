@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AuthInfoDTO {
 
-
+    private static final long serialVersionUID = 7526471295624376147L;
     /**
      * acls : ["root","manage_users","subscriptions","billing","support","provisioning","dns","abuse","upgrade","firewall"]
      * email : wangzhenhaois@gmail.com

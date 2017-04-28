@@ -33,6 +33,8 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
 
     @Override
     protected void initView() {
+        //activity跳转动画，存在bug
+        //setTransition(android.R.transition.fade,android.R.transition.fade,android.R.transition.fade);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         presenter = createPresenter();
@@ -57,7 +59,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
                 @Override
                 public void run() {
                     mIntent.setFlags(FLAG_NEEDINPUTKEY);
-                    startActivity(mIntent);
+                    startActivityTransition(mIntent,SplashActivity.this);
                     finish();
                 }
             },1000);
@@ -72,15 +74,14 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
         mIntent.setFlags(FLAG_NEEDINPUTKEY);
-        startActivity(mIntent);
+        startActivityTransition(mIntent,SplashActivity.this);
         finish();
     }
 
     @Override
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
-        mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
         mIntent.setFlags(FLAG_CHECKKEYSUCCESS).putExtra("dto",dto);
-        startActivity(mIntent);
+        startActivityTransition(mIntent,SplashActivity.this);
         finish();
     }
 }
