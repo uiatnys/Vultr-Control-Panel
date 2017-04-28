@@ -28,6 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.AccountActivity"
+            android:theme="@style/style_accountactivity_transparent"/>
     </application>
 
 </manifest>

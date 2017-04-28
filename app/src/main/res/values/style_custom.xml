@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="style_account_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="style_account_tv_name">
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textColor">@color/color_primarytext</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.4</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="style_account_tv_value">
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textColor">@color/color_secondery_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_weight">0.6</item>
+    </style>
+</resources>

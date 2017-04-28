@@ -1,5 +1,6 @@
 package com.wangzh.vultr.ui;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +41,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     protected MainPresenter mMainPresenter;
     protected AccountInfoDTO mAccountInfoDTO;
     protected AuthInfoDTO mAuthInfoDTO;
+    protected Intent mIntent;
 
 
     protected abstract void initContent();
@@ -80,6 +82,9 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case  R.id.nav_account:
+                mIntent = new Intent(mActivity,AccountActivity.class);
+                mIntent.putExtra("accountInfo",mAccountInfoDTO).putExtra("authInfo",mAuthInfoDTO);
+                startActivityTransition(mIntent,mActivity);
                 break;
             case  R.id.nav_gallery:
                 break;

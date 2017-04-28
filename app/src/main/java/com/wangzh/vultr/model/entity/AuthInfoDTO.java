@@ -1,12 +1,13 @@
 package com.wangzh.vultr.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by WangZH on 2017/4/27.
  */
 
-public class AuthInfoDTO {
+public class AuthInfoDTO implements Serializable{
 
     private static final long serialVersionUID = 7526471295624376147L;
     /**

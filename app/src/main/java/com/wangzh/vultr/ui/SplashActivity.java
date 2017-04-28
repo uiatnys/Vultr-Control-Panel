@@ -39,7 +39,6 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         ButterKnife.bind(this);
         presenter = createPresenter();
         mSplashPresenter = (SplashPresenter) presenter;
-        mIntent = new Intent(SplashActivity.this,MainActivity.class);
     }
 
     @Override
@@ -47,10 +46,11 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         getSupportActionBar().hide();
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        super.onResume();
+        mIntent = new Intent(mActivity,MainActivity.class);
         if (Build.VERSION.SDK_INT>=21){
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        super.onResume();
         API_KEY = mSPUtils.getString(SPConst.SP_APIKEY);
         if (!StringUtils.isEmpty(API_KEY)){
             mSplashPresenter.getAccountInfoByKey(API_KEY);
@@ -59,7 +59,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
                 @Override
                 public void run() {
                     mIntent.setFlags(FLAG_NEEDINPUTKEY);
-                    startActivityTransition(mIntent,SplashActivity.this);
+                    startActivityTransition(mIntent,mActivity);
                     finish();
                 }
             },1000);
@@ -74,14 +74,14 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
         mIntent.setFlags(FLAG_NEEDINPUTKEY);
-        startActivityTransition(mIntent,SplashActivity.this);
+        startActivityTransition(mIntent,mActivity);
         finish();
     }
 
     @Override
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
         mIntent.setFlags(FLAG_CHECKKEYSUCCESS).putExtra("dto",dto);
-        startActivityTransition(mIntent,SplashActivity.this);
+        startActivityTransition(mIntent,mActivity);
         finish();
     }
 }

@@ -5,8 +5,11 @@
     <color name="colorAccent">#9E9E9E</color>
     <color name="color_primarytext">#212121</color>
     <color name="color_light_primary">#CFD8DC</color>
+    <color name="color_divide_line">#d9d9d9</color>
     <color name="color_secondery_text">#757575</color>
     <color name="color_text_icon">#FFFFFF</color>
     <color name="color_divider_color">#BDBDBD</color>
     <color name="color_fefefe">#fefefe</color>
+    <color name="color_f9f9f9">#f9f9f9</color>
+    <color name="color_account_background">#80000000</color>
 </resources>
