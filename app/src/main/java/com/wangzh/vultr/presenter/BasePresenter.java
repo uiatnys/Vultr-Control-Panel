@@ -17,11 +17,13 @@ public class BasePresenter<V> {
 
     public V view;
     private CompositeSubscription mCompositeSubscription;
-    protected Api mApi;
+    protected Api mApiWithJson;
+
+
 
     public void attachView(V view){
         this.view = view;
-        mApi = Request.retrofit().create(Api.class);
+        mApiWithJson = Request.retrofit().create(Api.class);
     }
 
     public void detachView(){

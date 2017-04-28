@@ -9,6 +9,7 @@ import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
@@ -89,4 +90,10 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     public void onGetAuthInfoSuccess(AuthInfoDTO dto) {
         this.mAuthInfoDTO = dto;
     }
+
+    @Override
+    public void onGetSupportedAppSuccess(SupportedAppVO vo) {
+
+    }
+
 }

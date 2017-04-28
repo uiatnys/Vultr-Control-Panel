@@ -21,7 +21,7 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public class Request {
 
-    public static Retrofit mRetrofit;
+    private static Retrofit mRetrofit;
 
     public static Retrofit retrofit() {
         if (mRetrofit == null) {

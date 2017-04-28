@@ -17,7 +17,7 @@ public class SplashPresenter extends BasePresenter<SplashViewI> {
 
 
     public void getAccountInfoByKey(String apiKey){
-        addSubscribe(mApi.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>() {
+        addSubscribe(mApiWithJson.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>() {
             @Override
             public void onSuccess(AccountInfoDTO o) {
                 view.onCheckApiKeySuccess(o);

@@ -7,8 +7,8 @@
             android:icon="@drawable/ic_menu_account"
             android:title="Account"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_supported"
+            android:icon="@drawable/ic_menu_supported"
             android:title="Gallery"/>
         <item
             android:id="@+id/nav_slideshow"

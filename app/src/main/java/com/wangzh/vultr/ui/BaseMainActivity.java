@@ -86,7 +86,8 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
                 mIntent.putExtra("accountInfo",mAccountInfoDTO).putExtra("authInfo",mAuthInfoDTO);
                 startActivityTransition(mIntent,mActivity);
                 break;
-            case  R.id.nav_gallery:
+            case  R.id.nav_supported:
+                mMainPresenter.getAppList();
                 break;
             case  R.id.nav_slideshow:
                 break;

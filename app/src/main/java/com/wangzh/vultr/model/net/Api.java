@@ -25,4 +25,7 @@ public interface Api {
 
     @GET("/v1/auth/info")
     Observable<AuthInfoDTO> getAuthInfo(@Query("api_key") String apikey);
+
+    @GET("/v1/app/list")
+    Observable<Object> getAppList();
 }
