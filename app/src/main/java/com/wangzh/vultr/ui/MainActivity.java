@@ -15,6 +15,8 @@ import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseMainActivity implements AlertDialogBuilder.AlertDialogOkClickListener{
@@ -92,8 +94,9 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     }
 
     @Override
-    public void onGetSupportedAppSuccess(SupportedAppVO vo) {
+    public void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists) {
 
     }
+
 
 }
