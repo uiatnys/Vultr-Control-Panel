@@ -14,6 +14,7 @@ import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
+import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import java.util.List;
 
@@ -95,7 +96,13 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists) {
-
+        SupportedAppFragment supportedAppFragment = new SupportedAppFragment();
+        supportedAppFragment.setSupportedAppData(supportedLists);
+        getFragmentManager().beginTransaction()
+                .replace(mFrameContainer.getId(),supportedAppFragment,"supportedAppFragment")
+                .show(getFragmentManager().findFragmentByTag("supportedAppFragment"))
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
     }
 
 

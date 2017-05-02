@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
@@ -35,6 +36,8 @@ public abstract class BaseMainActivity extends BasePresenterActivity  implements
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.fl_main_content_container)
+    FrameLayout mFrameContainer;
 
     protected AlertDialogBuilder mAlertDialogBuilder;
     protected AlertDialog mAlertDialog;

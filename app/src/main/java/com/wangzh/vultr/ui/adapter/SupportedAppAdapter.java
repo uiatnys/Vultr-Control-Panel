@@ -22,9 +22,16 @@ import butterknife.ButterKnife;
 
 public class SupportedAppAdapter extends BaseQuickAdapter<SupportedAppVO,SupportedAppAdapter.MyViewHolder> {
 
+private List<SupportedAppVO> dataList;
 
     public SupportedAppAdapter(@LayoutRes int layoutResId, @Nullable List<SupportedAppVO> data) {
-        super(R.layout.item_supportedapp, data);
+        super(layoutResId, data);
+    }
+
+
+    public void setDataList(List<SupportedAppVO> data){
+        this.dataList = data;
+        notifyDataSetChanged();
     }
 
     @Override

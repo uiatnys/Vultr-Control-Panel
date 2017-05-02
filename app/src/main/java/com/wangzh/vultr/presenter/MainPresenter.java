@@ -74,10 +74,10 @@ public class MainPresenter extends BasePresenter<MainViewI> {
                     vo.setName((String) entryMap.get(SupportedAppVO.VALUE_NAME));
                     vo.setDeploy_name((String) entryMap.get(SupportedAppVO.VALUE_DEPLOY_NAME));
                     vo.setShort_name((String) entryMap.get(SupportedAppVO.VALUE_SHORT_NAME));
-                    vo.setSurcharge((String)entryMap.get(SupportedAppVO.VALUE_SURCHARGE));
+                    vo.setSurcharge(entryMap.get(SupportedAppVO.VALUE_SURCHARGE)+"");
                     supportedList.add(vo);
                 }
-                view.onGetSupportedAppSuccess(null);
+                view.onGetSupportedAppSuccess(supportedList);
             }
 
             @Override
