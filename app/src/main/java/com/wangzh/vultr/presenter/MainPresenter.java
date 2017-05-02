@@ -1,7 +1,5 @@
 package com.wangzh.vultr.presenter;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSONObject;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
@@ -11,7 +9,6 @@ import com.wangzh.vultr.model.net.CallBack;
 import com.wangzh.vultr.presenter.i.MainViewI;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +74,7 @@ public class MainPresenter extends BasePresenter<MainViewI> {
                     vo.setName((String) entryMap.get(SupportedAppVO.VALUE_NAME));
                     vo.setDeploy_name((String) entryMap.get(SupportedAppVO.VALUE_DEPLOY_NAME));
                     vo.setShort_name((String) entryMap.get(SupportedAppVO.VALUE_SHORT_NAME));
-                    vo.setSurcharge((Integer) entryMap.get(SupportedAppVO.VALUE_SURCHARGE));
+                    vo.setSurcharge((String)entryMap.get(SupportedAppVO.VALUE_SURCHARGE));
                     supportedList.add(vo);
                 }
                 view.onGetSupportedAppSuccess(null);

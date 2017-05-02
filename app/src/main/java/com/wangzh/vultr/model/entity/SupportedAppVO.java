@@ -17,14 +17,14 @@ public class SupportedAppVO {
      * name : LEMP
      * short_name : lemp
      * deploy_name : LEMP on CentOS 6 x64
-     * surcharge : 0
+     * surcharge : 0  附加费
      */
 
     private String APPID;
     private String name;
     private String short_name;
     private String deploy_name;
-    private int surcharge;
+    private String surcharge;
 
     public String getAPPID() {
         return APPID;
@@ -58,11 +58,11 @@ public class SupportedAppVO {
         this.deploy_name = deploy_name;
     }
 
-    public int getSurcharge() {
+    public String getSurcharge() {
         return surcharge;
     }
 
-    public void setSurcharge(int surcharge) {
+    public void setSurcharge(String surcharge) {
         this.surcharge = surcharge;
     }
 }
