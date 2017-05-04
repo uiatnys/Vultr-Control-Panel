@@ -1,5 +1,7 @@
 package com.wangzh.vultr.ui;
 
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
@@ -10,12 +12,14 @@ import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
+import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
 import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -97,13 +101,9 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     @Override
     public void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists) {
         SupportedAppFragment supportedAppFragment = new SupportedAppFragment();
-        supportedAppFragment.setSupportedAppData(supportedLists);
-        getFragmentManager().beginTransaction()
-                .replace(mFrameContainer.getId(),supportedAppFragment,"supportedAppFragment")
-                .show(getFragmentManager().findFragmentByTag("supportedAppFragment"))
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO, (ArrayList<? extends Parcelable>) supportedLists);
+        supportedAppFragment.setArguments(bundle);
+        showFragment(mFrameContainer.getId(),supportedAppFragment);
     }
-
-
 }

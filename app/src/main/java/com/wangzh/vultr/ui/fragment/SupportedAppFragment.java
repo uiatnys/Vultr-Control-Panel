@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
+import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.ui.adapter.SupportedAppAdapter;
 
 import java.util.List;
@@ -28,19 +29,25 @@ public class SupportedAppFragment extends BaseFragment {
 
     private View mRootView;
     private SupportedAppAdapter mSupportedAppAdapter;
+    private List<SupportedAppVO> mSupportedAppVOs;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_common_ll,null);
-        ButterKnife.bind(mRootView,getActivity());
+        ButterKnife.bind(this,mRootView);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         mRv.setLayoutManager(manager);
+        mSupportedAppAdapter = new SupportedAppAdapter(R.layout.item_supportedapp,null);
         mRv.setAdapter(mSupportedAppAdapter);
         return mRootView;
     }
 
-    public void setSupportedAppData(List<SupportedAppVO> data){
-        mSupportedAppAdapter = new SupportedAppAdapter(R.layout.item_supportedapp,data);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.mSupportedAppVOs = getArguments().getParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO);
+        mSupportedAppAdapter.setDataList(mSupportedAppVOs);
     }
 }

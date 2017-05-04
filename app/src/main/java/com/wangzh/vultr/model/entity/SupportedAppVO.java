@@ -1,10 +1,13 @@
 package com.wangzh.vultr.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by WangZH on 2017/4/28.
  */
 
-public class SupportedAppVO {
+public class SupportedAppVO implements Parcelable{
 
     public static final String VALUE_APPID = "APPID";
     public static final String VALUE_NAME = "name";
@@ -65,4 +68,41 @@ public class SupportedAppVO {
     public void setSurcharge(String surcharge) {
         this.surcharge = surcharge;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.APPID);
+        dest.writeString(this.name);
+        dest.writeString(this.short_name);
+        dest.writeString(this.deploy_name);
+        dest.writeString(this.surcharge);
+    }
+
+    public SupportedAppVO() {
+    }
+
+    protected SupportedAppVO(Parcel in) {
+        this.APPID = in.readString();
+        this.name = in.readString();
+        this.short_name = in.readString();
+        this.deploy_name = in.readString();
+        this.surcharge = in.readString();
+    }
+
+    public static final Creator<SupportedAppVO> CREATOR = new Creator<SupportedAppVO>() {
+        @Override
+        public SupportedAppVO createFromParcel(Parcel source) {
+            return new SupportedAppVO(source);
+        }
+
+        @Override
+        public SupportedAppVO[] newArray(int size) {
+            return new SupportedAppVO[size];
+        }
+    };
 }

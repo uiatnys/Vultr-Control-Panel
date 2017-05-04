@@ -2,6 +2,7 @@ package com.wangzh.vultr.ui.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,5 +57,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }else {*/
             startActivity(intent);
         //}
+    }
+
+    protected void showFragment(int layout,Fragment fragment){
+        showFragment(layout,fragment,null);
+    }
+
+    protected void showFragment(int layout,Fragment fragment,String tag){
+        getFragmentManager().beginTransaction().replace(layout,fragment,tag).commit();
     }
 }
