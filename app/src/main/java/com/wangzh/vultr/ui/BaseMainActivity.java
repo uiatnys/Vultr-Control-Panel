@@ -16,6 +16,7 @@ import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
+import com.wangzh.vultr.presenter.RequestType;
 import com.wangzh.vultr.presenter.i.MainViewI;
 import com.wangzh.vultr.ui.base.BasePresenterActivity;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
@@ -26,7 +27,8 @@ import butterknife.BindView;
  * Created by WangZH on 2017/4/26.
  */
 
-public abstract class BaseMainActivity extends BasePresenterActivity  implements NavigationView.OnNavigationItemSelectedListener,MainViewI{
+public abstract class BaseMainActivity extends BasePresenterActivity
+        implements NavigationView.OnNavigationItemSelectedListener,MainViewI,RequestType{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

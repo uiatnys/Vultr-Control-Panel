@@ -14,6 +14,19 @@ public class HttpErrorVo {
      * 异常信息，如果是HttpException则为message,否则为exception.message
      */
     private String message;
+    /**
+     * type 类型，用于区分哪个请求
+     * @return
+     */
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getCode() {
         return code;

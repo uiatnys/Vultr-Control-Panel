@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.others.constants.ConstValues;
+import com.wangzh.vultr.others.utils.CommonItemDecoration;
 import com.wangzh.vultr.ui.adapter.SupportedAppAdapter;
 
 import java.util.List;
@@ -39,7 +40,9 @@ public class SupportedAppFragment extends BaseFragment {
         ButterKnife.bind(this,mRootView);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         mRv.setLayoutManager(manager);
-        mSupportedAppAdapter = new SupportedAppAdapter(R.layout.item_supportedapp,null);
+        mRv.setHasFixedSize(true);
+        mRv.addItemDecoration(new CommonItemDecoration(20,40,20,0));
+        mSupportedAppAdapter = new SupportedAppAdapter(null);
         mRv.setAdapter(mSupportedAppAdapter);
         return mRootView;
     }
@@ -48,6 +51,6 @@ public class SupportedAppFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.mSupportedAppVOs = getArguments().getParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO);
-        mSupportedAppAdapter.setDataList(mSupportedAppVOs);
+        mSupportedAppAdapter.setNewData(mSupportedAppVOs);
     }
 }

@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseMainActivity implements AlertDialogBuilder.AlertDialogOkClickListener{
 
@@ -67,12 +69,22 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
-        mSPUtils.put(SPConst.SP_APIKEY,"");
-        if (HttpResponseUtil.getCodeMap().containsKey(failMsg.getCode())){
-            ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("StatusCode-"+failMsg.getCode()+"-Please Check Apikey Correct");
-        }else {
-            ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("Maybe SomeThing Wrong,Please Feedback Me!");
+        switch (failMsg.getType()){
+            case REQUESTTYPE_GETACCOUNTINFOBYKEY:
+                mSPUtils.put(SPConst.SP_APIKEY,"");
+                if (HttpResponseUtil.getCodeMap().containsKey(failMsg.getCode())){
+                    ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("StatusCode-"+failMsg.getCode()+"-Please Check Apikey Correct");
+                }else {
+                    ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("Some Wrong,Please Check Your Key Or Net Connection!");
+                }
+                break;
+            default:
+                Toasty.warning(this, failMsg.getMessage().contains(":")
+                        ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
+                        :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
+                break;
         }
+
     }
 
     private void getAuthInfo(){

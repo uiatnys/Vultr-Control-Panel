@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by WangZH on 2017/4/24.
  */
 
-public class MainPresenter extends BasePresenter<MainViewI> {
+public class MainPresenter extends BasePresenter<MainViewI> implements RequestType{
 
     public MainPresenter(MainViewI mainViewI){
         attachView(mainViewI);
@@ -31,6 +31,7 @@ public class MainPresenter extends BasePresenter<MainViewI> {
 
             @Override
             public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_GETACCOUNTINFOBYKEY);
                 view.getDataFail(msg);
             }
 
@@ -50,6 +51,7 @@ public class MainPresenter extends BasePresenter<MainViewI> {
 
             @Override
             public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_GETAUTHINFO);
                 view.getDataFail(msg);
             }
 
@@ -82,6 +84,7 @@ public class MainPresenter extends BasePresenter<MainViewI> {
 
             @Override
             public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_GETAPPLIST);
                 view.getDataFail(msg);
             }
 
