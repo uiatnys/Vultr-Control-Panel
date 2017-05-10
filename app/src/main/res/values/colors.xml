@@ -11,5 +11,6 @@
     <color name="color_common_list_background">#BDBDBD</color>
     <color name="color_fefefe">#fefefe</color>
     <color name="color_f9f9f9">#f9f9f9</color>
-    <color name="color_account_background">#80000000</color>
+    <color name="color_account_background">#00000000</color>
+    <color name="color_ff000000">#ff000000</color>
 </resources>

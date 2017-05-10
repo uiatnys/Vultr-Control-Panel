@@ -89,7 +89,8 @@ public abstract class BaseMainActivity extends BasePresenterActivity
             case  R.id.nav_account:
                 mIntent = new Intent(mActivity,AccountActivity.class);
                 mIntent.putExtra("accountInfo",mAccountInfoDTO).putExtra("authInfo",mAuthInfoDTO);
-                startActivityTransition(mIntent,mActivity);
+                mIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(mIntent);
                 break;
             case  R.id.nav_supported:
                 mMainPresenter.getAppList();

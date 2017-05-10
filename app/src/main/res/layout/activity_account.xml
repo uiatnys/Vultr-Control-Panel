@@ -1,121 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/ll_root"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/transparent"
-              android:layout_marginTop="70dp"
-              android:layout_marginLeft="30dp"
-              android:layout_marginRight="30dp"
-              android:layout_marginBottom="40dp"
+              android:background="@color/color_ff000000"
+              android:paddingTop="70dp"
+              android:paddingLeft="30dp"
+              android:paddingRight="30dp"
+              android:paddingBottom="40dp"
               android:orientation="vertical"
               android:weightSum="1">
-
     <LinearLayout
-        android:padding="10dp"
+        android:id="@+id/ll_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.93"
-        android:orientation="vertical"
-        android:background="@drawable/shape_account_frame"
-        android:weightSum="6">
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/style_account_container">
-            <TextView
-               style="@style/style_account_tv_name"
-                android:text="Name:"/>
-            <TextView
-                android:id="@+id/tv_name"
-               style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-       <include layout="@layout/common_divide_line"/>
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            style="@style/style_account_container">
-            <TextView
-                style="@style/style_account_tv_name"
-                android:text="Email:"/>
-            <TextView
-                android:id="@+id/tv_email"
-                style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            style="@style/style_account_container">
-            <TextView
-                style="@style/style_account_tv_name"
-                android:text="Balance:"/>
-            <TextView
-                android:id="@+id/tv_balance"
-                style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            style="@style/style_account_container">
-            <TextView
-                style="@style/style_account_tv_name"
-                android:text="Pending Charges:"/>
-            <TextView
-                android:id="@+id/tv_pending_charges"
-                style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            style="@style/style_account_container">
-            <TextView
-                style="@style/style_account_tv_name"
-                android:text="Last Payment Date:"/>
-            <TextView
-                android:id="@+id/tv_lastpay_date"
-                style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
-        <LinearLayout
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            style="@style/style_account_container">
-            <TextView
-                style="@style/style_account_tv_name"
-                android:text="Last Payment Amount:"/>
-            <TextView
-                android:id="@+id/tv_lastpay_amount"
-                style="@style/style_account_tv_value"
-                android:text=""/>
-        </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.07"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageButton
-            android:id="@+id/ibtn_close"
+        <LinearLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:background="@null"
-            app:srcCompat="@drawable/icon_account_close"/>
+            android:layout_height="0dp"
+            android:layout_weight="0.93"
+            android:orientation="vertical"
+            android:background="@drawable/shape_account_frame"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Name:"/>
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Email:"/>
+                <TextView
+                    android:id="@+id/tv_email"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Balance:"/>
+                <TextView
+                    android:id="@+id/tv_balance"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Pending Charges:"/>
+                <TextView
+                    android:id="@+id/tv_pending_charges"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Last Payment Date:"/>
+                <TextView
+                    android:id="@+id/tv_lastpay_date"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                style="@style/style_account_container">
+                <TextView
+                    style="@style/style_account_tv_name"
+                    android:text="Last Payment Amount:"/>
+                <TextView
+                    android:id="@+id/tv_lastpay_amount"
+                    style="@style/style_account_tv_value"
+                    android:text=""/>
+            </LinearLayout>
+            <include layout="@layout/common_divide_line"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@android:color/transparent"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.07"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/ibtn_close"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:background="@null"
+                app:srcCompat="@drawable/icon_account_close"/>
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
