@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.others.constants.ConstValues;
@@ -52,5 +53,6 @@ public class SupportedAppFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         this.mSupportedAppVOs = getArguments().getParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO);
         mSupportedAppAdapter.setNewData(mSupportedAppVOs);
+        mSupportedAppAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
     }
 }

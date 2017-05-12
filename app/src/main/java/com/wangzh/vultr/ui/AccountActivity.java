@@ -48,6 +48,7 @@ public class AccountActivity extends BasePresenterActivity {
 
     private AccountInfoDTO mAccountInfoDTO;
     private AuthInfoDTO mAuthInfoDTO;
+    private boolean isClickable = true;
 
     @OnClick({R.id.ibtn_close})
     void onClick(View view) {
@@ -60,7 +61,9 @@ public class AccountActivity extends BasePresenterActivity {
 
     @Override
     public void onBackPressed() {
-        startAlphaAnimation(false);
+        if (isClickable){
+            startAlphaAnimation(false);
+        }
     }
 
     @Override
@@ -78,7 +81,7 @@ public class AccountActivity extends BasePresenterActivity {
         TranslateAnimation translateAnimation;
         if (isEnter){
             translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(AccountActivity.this,R.anim.anim_account_topin);
-           valueAnimator = ValueAnimator.ofInt(0,150);
+            valueAnimator = ValueAnimator.ofInt(0,150);
         }else {
             translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(AccountActivity.this,R.anim.anim_account_topout);
             valueAnimator = ValueAnimator.ofInt(150,0);
@@ -96,14 +99,15 @@ public class AccountActivity extends BasePresenterActivity {
         valueAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-
+                isClickable = false;
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
                 if (!isEnter){
-                   AccountActivity.super.onBackPressed();
+                    AccountActivity.super.onBackPressed();
                 }
+                isClickable = true;
             }
 
             @Override

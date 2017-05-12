@@ -1,9 +1,13 @@
 package com.wangzh.vultr.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.blankj.utilcode.util.StringUtils;
@@ -15,6 +19,10 @@ import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.SplashPresenter;
 import com.wangzh.vultr.presenter.i.SplashViewI;
 import com.wangzh.vultr.ui.base.BasePresenterActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -52,18 +60,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         API_KEY = mSPUtils.getString(SPConst.SP_APIKEY);
-        if (!StringUtils.isEmpty(API_KEY)){
-            mSplashPresenter.getAccountInfoByKey(API_KEY);
-        }else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mIntent.setFlags(FLAG_NEEDINPUTKEY);
-                    startActivityTransition(mIntent,mActivity);
-                    finish();
-                }
-            },1000);
-        }
+        checkPermissions();
     }
 
     @Override
@@ -83,5 +80,55 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         mIntent.setFlags(FLAG_CHECKKEYSUCCESS).putExtra("dto",dto);
         startActivityTransition(mIntent,mActivity);
         finish();
+    }
+
+    /**
+     * 检查权限
+     */
+    protected void checkPermissions(){
+        List<String> permissionLists = new ArrayList<>();
+        permissionLists.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissionLists.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        List<String> needRequest = new ArrayList<>();
+        for (String str:permissionLists) {
+            if (ContextCompat.checkSelfPermission(this, str) == PackageManager.PERMISSION_DENIED) {
+                needRequest.add(str);
+            }
+        }
+        Object[] obj = needRequest.toArray();
+        String[] stringArray = Arrays.copyOf(obj,obj.length, String[].class);
+        if (stringArray !=null && stringArray.length>0){
+            ActivityCompat.requestPermissions(this, stringArray,0);
+        }
+    }
+
+    /**
+     * 权限回调接口
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length>0 && permissions.length>0){
+            for (int i=0;i<grantResults.length;i++){
+                if (grantResults[i]==PackageManager.PERMISSION_DENIED && permissions.length>i){
+                    ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this,permissions[i]);
+                }
+            }
+        }
+        if (!StringUtils.isEmpty(API_KEY)){
+            mSplashPresenter.getAccountInfoByKey(API_KEY);
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mIntent.setFlags(FLAG_NEEDINPUTKEY);
+                    startActivityTransition(mIntent,mActivity);
+                    finish();
+                }
+            },1000);
+        }
     }
 }

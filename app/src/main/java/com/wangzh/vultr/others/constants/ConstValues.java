@@ -10,4 +10,6 @@ public class ConstValues {
     public static final int ERROR_NONHTTP = -1;
 
     public static final String KEY_SUPPORTEDAPPVO = "SupportedAppVo";
+    public static final String FILE_ROOT_DIRECTORY = "/VultrControlPanel";
+    public static final String FILE_LOG = "/Log.txt";
 }

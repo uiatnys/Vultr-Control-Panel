@@ -30,12 +30,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     private String API_KEY ="";
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     @Override
     protected void initContent() {
         //activity跳转动画，存在bug
