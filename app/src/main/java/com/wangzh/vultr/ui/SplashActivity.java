@@ -63,6 +63,21 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         checkPermissions();
     }
 
+    private void requestData(){
+        if (!StringUtils.isEmpty(API_KEY)){
+            mSplashPresenter.getAccountInfoByKey(API_KEY);
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mIntent.setFlags(FLAG_NEEDINPUTKEY);
+                    startActivityTransition(mIntent,mActivity);
+                    finish();
+                }
+            },1000);
+        }
+    }
+
     @Override
     protected BasePresenter createPresenter() {
         return new SplashPresenter(this);
@@ -99,6 +114,8 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         String[] stringArray = Arrays.copyOf(obj,obj.length, String[].class);
         if (stringArray !=null && stringArray.length>0){
             ActivityCompat.requestPermissions(this, stringArray,0);
+        }else {
+            requestData();
         }
     }
 
@@ -118,17 +135,6 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
                 }
             }
         }
-        if (!StringUtils.isEmpty(API_KEY)){
-            mSplashPresenter.getAccountInfoByKey(API_KEY);
-        }else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mIntent.setFlags(FLAG_NEEDINPUTKEY);
-                    startActivityTransition(mIntent,mActivity);
-                    finish();
-                }
-            },1000);
-        }
+        requestData();
     }
 }

@@ -68,6 +68,10 @@ public abstract class BaseMainActivity extends BasePresenterActivity
         return true;
     }
 
+    public MainPresenter getMainPresenter(){
+        return mMainPresenter;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

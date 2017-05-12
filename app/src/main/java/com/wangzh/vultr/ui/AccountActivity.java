@@ -3,6 +3,7 @@ package com.wangzh.vultr.ui;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -125,12 +126,16 @@ public class AccountActivity extends BasePresenterActivity {
     }
 
     private void initData(){
-        mTvName.setText(StringUtil.replaceNull(mAuthInfoDTO.getName()));
-        mTvEmail.setText(StringUtil.replaceNull(mAuthInfoDTO.getEmail()));
-        mTvBalance.setText(StringUtil.replaceNull(mAccountInfoDTO.getBalance())+"$");
-        mTvLastpayAmount.setText(StringUtil.replaceNull(mAccountInfoDTO.getLast_payment_amount())+"$");
-        mTvLastpayDate.setText(StringUtil.replaceNull(mAccountInfoDTO.getLast_payment_date()));
-        mTvPendingCharges.setText(StringUtil.replaceNull(mAccountInfoDTO.getPending_charges())+"$");
+        if (mAuthInfoDTO!=null){
+            mTvName.setText(StringUtil.replaceNull(mAuthInfoDTO.getName()));
+            mTvEmail.setText(StringUtil.replaceNull(mAuthInfoDTO.getEmail()));
+        }
+        if (mAccountInfoDTO!=null){
+            mTvBalance.setText(StringUtil.replaceNull(mAccountInfoDTO.getBalance())+"$");
+            mTvLastpayAmount.setText(StringUtil.replaceNull(mAccountInfoDTO.getLast_payment_amount())+"$");
+            mTvLastpayDate.setText(StringUtil.replaceNull(mAccountInfoDTO.getLast_payment_date()));
+            mTvPendingCharges.setText(StringUtil.replaceNull(mAccountInfoDTO.getPending_charges())+"$");
+        }
     }
 
     @Override
@@ -141,5 +146,14 @@ public class AccountActivity extends BasePresenterActivity {
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
