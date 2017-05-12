@@ -64,6 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected void showFragment(int layout,Fragment fragment,String tag){
-        getFragmentManager().beginTransaction().replace(layout,fragment,tag).commit();
+        getFragmentManager().beginTransaction().replace(layout,fragment,tag).commitAllowingStateLoss();
     }
 }

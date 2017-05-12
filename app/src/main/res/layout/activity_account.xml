@@ -5,7 +5,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/color_ff000000"
-              android:paddingTop="70dp"
               android:paddingLeft="30dp"
               android:paddingRight="30dp"
               android:paddingBottom="40dp"
@@ -13,6 +12,7 @@
               android:weightSum="1">
     <LinearLayout
         android:id="@+id/ll_container"
+        android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

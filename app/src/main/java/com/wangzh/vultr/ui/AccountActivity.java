@@ -1,8 +1,12 @@
 package com.wangzh.vultr.ui;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,10 +54,13 @@ public class AccountActivity extends BasePresenterActivity {
         switch (view.getId()) {
             case R.id.ibtn_close:
                 startAlphaAnimation(false);
-                finish();
-                overridePendingTransition(0,0);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startAlphaAnimation(false);
     }
 
     @Override
@@ -66,21 +73,51 @@ public class AccountActivity extends BasePresenterActivity {
         initData();
     }
 
-    private void startAlphaAnimation(boolean isEnter){
+    private void startAlphaAnimation(final boolean isEnter){
         ValueAnimator valueAnimator;
+        TranslateAnimation translateAnimation;
         if (isEnter){
-           valueAnimator = ValueAnimator.ofInt(150,80);
+            translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(AccountActivity.this,R.anim.anim_account_topin);
+           valueAnimator = ValueAnimator.ofInt(0,150);
         }else {
-            valueAnimator = ValueAnimator.ofInt(80,0);
+            translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(AccountActivity.this,R.anim.anim_account_topout);
+            valueAnimator = ValueAnimator.ofInt(150,0);
         }
-        valueAnimator.setDuration(500);
+        translateAnimation.setFillAfter(true);
+        translateAnimation.setDuration(1000);
+        translateAnimation.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.setDuration(1000);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mLlRoot.setBackgroundColor(Color.argb((Integer) valueAnimator.getAnimatedValue(),0,0,0));
             }
         });
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                if (!isEnter){
+                   AccountActivity.super.onBackPressed();
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         valueAnimator.start();
+        mLlContent.startAnimation(translateAnimation);
     }
 
     private void initData(){
