@@ -63,6 +63,9 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
+        Toasty.warning(this, failMsg.getMessage().contains(":")
+                ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
+                :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
         switch (failMsg.getType()){
             case REQUESTTYPE_GETACCOUNTINFOBYKEY:
                 mSPUtils.put(SPConst.SP_APIKEY,"");
@@ -72,10 +75,8 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
                     ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("Some Wrong,Please Check Your Key Or Net Connection!");
                 }
                 break;
-            default:
-                Toasty.warning(this, failMsg.getMessage().contains(":")
-                        ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
-                        :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
+            case REQUESTTYPE_GETAPPLIST:
+                supportedAppFragment.setError();
                 break;
         }
 
@@ -106,10 +107,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists) {
-        SupportedAppFragment supportedAppFragment = new SupportedAppFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO, (ArrayList<? extends Parcelable>) supportedLists);
-        supportedAppFragment.setArguments(bundle);
-        showFragment(mFrameContainer.getId(),supportedAppFragment);
+        supportedAppFragment.setData(supportedLists);
     }
 }

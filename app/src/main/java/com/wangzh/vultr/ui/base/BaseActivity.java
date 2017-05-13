@@ -76,6 +76,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         getFragmentManager().beginTransaction().replace(layout,fragment,tag).commitAllowingStateLoss();
     }
 
+    protected Fragment getFragmentByTag(String tag){
+        try {
+            return getFragmentManager().findFragmentByTag(tag);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){

@@ -14,12 +14,14 @@ import android.widget.FrameLayout;
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
+import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.RequestType;
 import com.wangzh.vultr.presenter.i.MainViewI;
 import com.wangzh.vultr.ui.base.BasePresenterActivity;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
+import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import butterknife.BindView;
 
@@ -47,6 +49,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     protected AccountInfoDTO mAccountInfoDTO;
     protected AuthInfoDTO mAuthInfoDTO;
     protected Intent mIntent;
+    protected SupportedAppFragment supportedAppFragment;
 
 
     protected abstract void initContent();
@@ -97,6 +100,8 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 startActivity(mIntent);
                 break;
             case  R.id.nav_supported:
+                supportedAppFragment = new SupportedAppFragment();
+                showFragment(mFrameContainer.getId(),supportedAppFragment, ConstValues.FRAGMENT_SUPPORTEDAPP);
                 mMainPresenter.getAppList();
                 break;
             case  R.id.nav_mine:

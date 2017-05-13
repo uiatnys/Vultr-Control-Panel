@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wangzh.vultr.R;
@@ -35,25 +36,28 @@ public class SupportedAppFragment extends BaseFragment implements SwipeRefreshLa
 
     @Override
     int getRootView() {
-        return R.layout.fragment_common_ll;
+        return R.layout.fragment_supported_app;
     }
 
     @Override
     void initView() {
         mSrl.setOnRefreshListener(this);
-        mSrl.setColorSchemeColors(Color.rgb(0, 199, 255),Color.rgb(0,150,191),Color.rgb(0,100,127));
+        mSrl.setColorSchemeColors(ConstValues.COLOR_SWIPEREFRESH_1,ConstValues.COLOR_SWIPEREFRESH_2,ConstValues.COLOR_SWIPEREFRESH_3);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         mRv.setLayoutManager(manager);
         mRv.setHasFixedSize(true);
         mRv.addItemDecoration(new CommonItemDecoration(20,40,20,0));
         mSupportedAppAdapter = new SupportedAppAdapter(null);
         mRv.setAdapter(mSupportedAppAdapter);
+        mSupportedAppAdapter.setEmptyView(R.layout.layout_emptyview, (ViewGroup) mRv.getParent());
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.mSupportedAppVOs = getArguments().getParcelableArrayList(ConstValues.KEY_SUPPORTEDAPPVO);
+    public void setError(){
+        mSupportedAppAdapter.setEmptyView(R.layout.layout_errorview, (ViewGroup) mRv.getParent());
+    }
+
+    public void setData(List<SupportedAppVO> supportedLists){
+        this.mSupportedAppVOs = supportedLists;
         mSupportedAppAdapter.setNewData(mSupportedAppVOs);
         setRefreshFinished();
         mSupportedAppAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
