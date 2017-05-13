@@ -99,7 +99,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
             case  R.id.nav_supported:
                 mMainPresenter.getAppList();
                 break;
-            case  R.id.nav_slideshow:
+            case  R.id.nav_mine:
                 break;
             case  R.id.nav_manage:
                 break;

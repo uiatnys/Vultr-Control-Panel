@@ -37,6 +37,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
     private static final int FLAG_NEEDINPUTKEY = 0;
     private static final int FLAG_CHECKKEYSUCCESS = 1;
     private String API_KEY ="";
+    private boolean isPermissionChecked = false;
 
 
     @Override
@@ -60,7 +61,10 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         API_KEY = mSPUtils.getString(SPConst.SP_APIKEY);
-        checkPermissions();
+        if (!isPermissionChecked){
+            checkPermissions();
+            isPermissionChecked = true;
+        }
     }
 
     private void requestData(){
