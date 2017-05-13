@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.model.entity.MineVpsDataVO;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
@@ -78,6 +80,8 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
             case REQUESTTYPE_GETAPPLIST:
                 supportedAppFragment.setError();
                 break;
+            case REQUESTTYPE_GETMINEVPSDATA:
+                break;
         }
 
     }
@@ -108,5 +112,10 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     @Override
     public void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists) {
         supportedAppFragment.setData(supportedLists);
+    }
+
+    @Override
+    public void onGetMineVpsDataSuccess(List<MineVpsDataVO> mineVpsDataVOList) {
+        Log.e("","");
     }
 }

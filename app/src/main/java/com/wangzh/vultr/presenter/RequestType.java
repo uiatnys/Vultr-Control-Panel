@@ -9,4 +9,5 @@ public interface RequestType {
     String REQUESTTYPE_GETACCOUNTINFOBYKEY = "getAccountInfoByKey";
     String REQUESTTYPE_GETAUTHINFO = "getAuthInfo";
     String REQUESTTYPE_GETAPPLIST = "getAppList";
+    String REQUESTTYPE_GETMINEVPSDATA = "getMineVpsData";
 }

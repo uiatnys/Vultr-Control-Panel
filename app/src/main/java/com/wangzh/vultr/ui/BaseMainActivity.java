@@ -15,12 +15,14 @@ import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.others.constants.ConstValues;
+import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.RequestType;
 import com.wangzh.vultr.presenter.i.MainViewI;
 import com.wangzh.vultr.ui.base.BasePresenterActivity;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
+import com.wangzh.vultr.ui.fragment.MineAppFragment;
 import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import butterknife.BindView;
@@ -50,6 +52,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     protected AuthInfoDTO mAuthInfoDTO;
     protected Intent mIntent;
     protected SupportedAppFragment supportedAppFragment;
+    protected MineAppFragment mineAppFragment;
 
 
     protected abstract void initContent();
@@ -105,6 +108,9 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 mMainPresenter.getAppList();
                 break;
             case  R.id.nav_mine:
+                mineAppFragment = new MineAppFragment();
+                showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
+                mMainPresenter.getMineVpsData(mSPUtils.getString(SPConst.SP_APIKEY));
                 break;
             case  R.id.nav_manage:
                 break;

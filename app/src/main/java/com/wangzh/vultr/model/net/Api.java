@@ -28,4 +28,7 @@ public interface Api {
 
     @GET("/v1/app/list")
     Observable<Object> getAppList();
+
+    @GET("/v1/server/list")
+    Observable<Object> getMineVpsData(@Query("api_key") String apikey);
 }

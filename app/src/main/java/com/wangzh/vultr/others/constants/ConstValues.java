@@ -20,4 +20,5 @@ public class ConstValues {
     public static final int COLOR_SWIPEREFRESH_3 = Color.rgb(0,100,127);
 
     public static final String FRAGMENT_SUPPORTEDAPP = "fragment_supportedapp";
+    public static final String FRAGMENT_MINEAPP = "fragment_mineapp";
 }
