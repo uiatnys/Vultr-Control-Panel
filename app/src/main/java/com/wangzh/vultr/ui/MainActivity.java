@@ -7,9 +7,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.app.MainApplication;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
@@ -18,8 +20,10 @@ import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.utils.HttpResponseUtil;
+import com.wangzh.vultr.others.utils.StringUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
+import com.wangzh.vultr.ui.fragment.MineAppFragment;
 import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import java.util.ArrayList;
@@ -54,11 +58,14 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         mAlertDialogBuilder = new AlertDialogBuilder(this);
         presenter = createPresenter();
         mMainPresenter = (MainPresenter) presenter;
+        mineAppFragment = new MineAppFragment();
+        showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
         if (getIntent().getFlags() == 0){
             mAlertDialog = mAlertDialogBuilder.createDialogStyleA(this,"ApiKey Check", R.layout.edt_dialoginput);
             mAlertDialog.show();
         }else {
             this.mAccountInfoDTO = (AccountInfoDTO) getIntent().getSerializableExtra("dto");
+            getMineVps();
             getAuthInfo();
         }
     }
@@ -70,7 +77,7 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
                 :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
         switch (failMsg.getType()){
             case REQUESTTYPE_GETACCOUNTINFOBYKEY:
-                mSPUtils.put(SPConst.SP_APIKEY,"");
+                MainApplication.getSpUtils().put(SPConst.SP_APIKEY,"");
                 if (HttpResponseUtil.getCodeMap().containsKey(failMsg.getCode())){
                     ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("StatusCode-"+failMsg.getCode()+"-Please Check Apikey Correct");
                 }else {
@@ -87,7 +94,11 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     }
 
     private void getAuthInfo(){
-     mMainPresenter.getAuthInfo(mSPUtils.getString(SPConst.SP_APIKEY));
+     mMainPresenter.getAuthInfo(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
+    }
+
+    private void getMineVps(){
+        mMainPresenter.getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
     }
 
     @Override
@@ -99,14 +110,17 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     @Override
     public void onCheckApiKeySuccess(AccountInfoDTO dto) {
         mAlertDialog.dismiss();
-        mSPUtils.put(SPConst.SP_APIKEY,API_KEY);
+        MainApplication.getSpUtils().put(SPConst.SP_APIKEY,API_KEY);
         this.mAccountInfoDTO = dto;
+        getMineVps();
         getAuthInfo();
     }
 
     @Override
     public void onGetAuthInfoSuccess(AuthInfoDTO dto) {
         this.mAuthInfoDTO = dto;
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_header_name)).setText(StringUtil.replaceNull(mAuthInfoDTO.getName()));
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_header_email)).setText(StringUtil.replaceNull(mAuthInfoDTO.getEmail()));
     }
 
     @Override
@@ -116,6 +130,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onGetMineVpsDataSuccess(List<MineVpsDataVO> mineVpsDataVOList) {
-        Log.e("","");
+        mineAppFragment.setData(mineVpsDataVOList);
     }
 }

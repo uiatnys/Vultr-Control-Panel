@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.app.MainApplication;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.others.constants.SPConst;
@@ -60,7 +61,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         if (Build.VERSION.SDK_INT>=21){
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        API_KEY = mSPUtils.getString(SPConst.SP_APIKEY);
+        API_KEY = MainApplication.getSpUtils().getString(SPConst.SP_APIKEY);
         if (!isPermissionChecked){
             checkPermissions();
             isPermissionChecked = true;

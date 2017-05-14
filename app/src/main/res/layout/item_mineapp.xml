@@ -3,7 +3,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="200dp"
     cardview:cardCornerRadius="20dp"
     cardview:cardElevation="5dp"
     cardview:contentPadding="15dp">
@@ -20,9 +20,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name:"/>
+                android:text="Label:"/>
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/tv_label"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/color_primarytext"
                 android:layout_width="match_parent"
@@ -35,15 +35,49 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <TextView
-                android:text="Surcharge:"
+                android:text="Location:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tv_surcharge"
+                android:id="@+id/tv_location"
                 android:textColor="@color/color_primarytext"
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:text="OS:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_os"
+                android:textColor="@color/color_primarytext"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:text="IP:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_ip"
+            android:textColor="@color/color_primarytext"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

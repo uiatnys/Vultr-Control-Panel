@@ -10,8 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.wangzh.vultr.R;
+import com.wangzh.vultr.app.MainApplication;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.others.constants.ConstValues;
@@ -51,6 +53,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     protected AccountInfoDTO mAccountInfoDTO;
     protected AuthInfoDTO mAuthInfoDTO;
     protected Intent mIntent;
+
     protected SupportedAppFragment supportedAppFragment;
     protected MineAppFragment mineAppFragment;
 
@@ -110,7 +113,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
             case  R.id.nav_mine:
                 mineAppFragment = new MineAppFragment();
                 showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
-                mMainPresenter.getMineVpsData(mSPUtils.getString(SPConst.SP_APIKEY));
+                mMainPresenter.getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
                 break;
             case  R.id.nav_manage:
                 break;
@@ -120,7 +123,6 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 break;
             default:break;
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -52,9 +52,11 @@ public class SupportedAppFragment extends BaseFragment implements SwipeRefreshLa
         mSupportedAppAdapter.setEmptyView(R.layout.layout_emptyview, (ViewGroup) mRv.getParent());
     }
 
-    public void setError(){
+    @Override
+    public void setError() {
         mSupportedAppAdapter.setEmptyView(R.layout.layout_errorview, (ViewGroup) mRv.getParent());
     }
+
 
     public void setData(List<SupportedAppVO> supportedLists){
         this.mSupportedAppVOs = supportedLists;

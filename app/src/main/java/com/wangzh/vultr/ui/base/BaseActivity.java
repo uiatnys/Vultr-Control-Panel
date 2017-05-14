@@ -27,7 +27,6 @@ import es.dmoral.toasty.Toasty;
 public abstract class BaseActivity extends AppCompatActivity implements BaseViewI{
 
     public Activity mActivity;
-    protected static SPUtils mSPUtils;
     //上次按下返回键的系统时间
     private long lastBackTime = 0;
     //当前按下返回键的系统时间
@@ -39,7 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         init();
         mActivity = this;
-        mSPUtils = new SPUtils(SPConst.SHAREDPREFERENCE_SYSNAME);
     }
 
     protected abstract void init();

@@ -28,4 +28,5 @@ public abstract class BaseFragment extends Fragment {
 
     abstract int getRootView();
     abstract void initView();
+    public abstract void setError();
 }
