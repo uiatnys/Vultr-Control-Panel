@@ -1,10 +1,7 @@
 package com.wangzh.vultr.ui;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,9 +21,7 @@ import com.wangzh.vultr.others.utils.StringUtil;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.ui.dialog.AlertDialogBuilder;
 import com.wangzh.vultr.ui.fragment.MineAppFragment;
-import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;

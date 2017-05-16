@@ -21,4 +21,7 @@ public class ConstValues {
 
     public static final String FRAGMENT_SUPPORTEDAPP = "fragment_supportedapp";
     public static final String FRAGMENT_MINEAPP = "fragment_mineapp";
+
+    public static final int REQUEST_CODE_FROM_ACCOUNT = 0;
+    public static final int RESULT_CODE_FROM_ACCOUNT = 1;
 }

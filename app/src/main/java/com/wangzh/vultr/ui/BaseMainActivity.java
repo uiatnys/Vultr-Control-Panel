@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.app.MainApplication;
@@ -100,17 +99,22 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case  R.id.nav_account:
+                String title = (String) toolbar.getTitle();
+                toolbar.setTitle("Account");
                 mIntent = new Intent(mActivity,AccountActivity.class);
                 mIntent.putExtra("accountInfo",mAccountInfoDTO).putExtra("authInfo",mAuthInfoDTO);
+                mIntent.putExtra("title",title);
                 mIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(mIntent);
+                startActivityForResult(mIntent,ConstValues.REQUEST_CODE_FROM_ACCOUNT);
                 break;
             case  R.id.nav_supported:
+                toolbar.setTitle("Supported App");
                 supportedAppFragment = new SupportedAppFragment();
                 showFragment(mFrameContainer.getId(),supportedAppFragment, ConstValues.FRAGMENT_SUPPORTEDAPP);
                 mMainPresenter.getAppList();
                 break;
             case  R.id.nav_mine:
+                toolbar.setTitle("Mine App");
                 mineAppFragment = new MineAppFragment();
                 showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
                 mMainPresenter.getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
@@ -125,6 +129,14 @@ public abstract class BaseMainActivity extends BasePresenterActivity
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ConstValues.REQUEST_CODE_FROM_ACCOUNT && resultCode == ConstValues.RESULT_CODE_FROM_ACCOUNT){
+            toolbar.setTitle(data.getStringExtra("title"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

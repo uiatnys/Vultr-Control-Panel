@@ -3,8 +3,8 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    cardview:cardCornerRadius="20dp"
+    android:layout_height="80dp"
+    cardview:cardCornerRadius="10dp"
     cardview:cardElevation="5dp"
     cardview:contentPadding="15dp">
     <LinearLayout

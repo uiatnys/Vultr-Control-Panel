@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-<TextView
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:gravity="center"
-    android:text="loading"/>
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="top"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="0.24"
+            android:layout_height="match_parent"/>
+        <com.wangzh.vultr.others.widget.AnimatedSvgView.AnimatedSvgView
+            android:id="@+id/svg_load"
+            android:layout_width="0dp"
+            android:layout_weight="0.76"
+            android:layout_height="match_parent"
+            app:animatedSvgFillColors="@array/svg_load_color"
+            app:animatedSvgGlyphStrings="@array/svg_load"
+            app:animatedSvgFillStart="1100"
+            app:animatedSvgFillTime="1500"
+            app:animatedSvgImageSizeX="850"
+            app:animatedSvgImageSizeY="850"
+            app:animatedSvgTraceTime="1000"
+            app:animatedSvgTraceTimePerGlyph="1000"/>
+    </LinearLayout>
 </LinearLayout>

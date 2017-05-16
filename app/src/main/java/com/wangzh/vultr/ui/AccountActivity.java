@@ -2,6 +2,7 @@ package com.wangzh.vultr.ui;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
+import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.utils.StringUtil;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.ui.base.BasePresenterActivity;
@@ -106,6 +108,7 @@ public class AccountActivity extends BasePresenterActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 if (!isEnter){
+                    setResult(ConstValues.RESULT_CODE_FROM_ACCOUNT,new Intent().putExtra("title",getIntent().getStringExtra("title")));
                     AccountActivity.super.onBackPressed();
                 }
                 isClickable = true;
