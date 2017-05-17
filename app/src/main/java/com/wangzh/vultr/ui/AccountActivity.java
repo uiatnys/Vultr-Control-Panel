@@ -57,7 +57,7 @@ public class AccountActivity extends BasePresenterActivity {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibtn_close:
-                startAlphaAnimation(false);
+                onBackPressed();
                 break;
         }
     }
@@ -65,6 +65,7 @@ public class AccountActivity extends BasePresenterActivity {
     @Override
     public void onBackPressed() {
         if (isClickable){
+            isClickable = false;
             startAlphaAnimation(false);
         }
     }
@@ -90,9 +91,9 @@ public class AccountActivity extends BasePresenterActivity {
             valueAnimator = ValueAnimator.ofInt(150,0);
         }
         translateAnimation.setFillAfter(true);
-        translateAnimation.setDuration(1000);
+        translateAnimation.setDuration(700);
         translateAnimation.setInterpolator(new DecelerateInterpolator());
-        valueAnimator.setDuration(1000);
+        valueAnimator.setDuration(700);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {

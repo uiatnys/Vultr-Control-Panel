@@ -32,6 +32,36 @@ public class MineAppAdapter extends BaseQuickAdapter<MineVpsDataVO,BaseViewHolde
                 .setText(R.id.tv_ip,StringUtil.replaceNull(item.getMain_ip()))
                 .setText(R.id.tv_status,StringUtil.replaceNull(item.getStatus()))
                 .setText(R.id.tv_serverstatus,StringUtil.replaceNull(item.getServer_state()))
-                .setText(R.id.tv_powerstatus,StringUtil.replaceNull(item.getPower_status()));
+                .setText(R.id.tv_powerstatus,StringUtil.replaceNull(item.getPower_status()))
+                .setImageResource(R.id.iv_logo, getLogoResource(StringUtil.replaceNull(item.getOs())));
+    }
+
+    private int getLogoResource(String os){
+        os = os.toLowerCase();
+        if (os.contains("centos")){
+            return R.drawable.centos_logo;
+        }
+        if (os.contains("coreos")){
+            return R.drawable.coreos_logo;
+        }
+        if (os.contains("debian")){
+            return R.drawable.debian_logo;
+        }
+        if (os.contains("fedora")){
+            return R.drawable.fedora_logo;
+        }
+        if (os.contains("freebsd")){
+            return R.drawable.freebsd_logo;
+        }
+        if (os.contains("openbsd")){
+            return R.drawable.openbsd_logo;
+        }
+        if (os.contains("ubuntu")){
+            return R.drawable.ubuntu_logo;
+        }
+        if (os.contains("windows")){
+            return R.drawable.windows_logo;
+        }
+        return R.drawable.otheros_logo;
     }
 }
