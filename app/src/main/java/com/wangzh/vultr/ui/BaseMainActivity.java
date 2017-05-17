@@ -17,6 +17,7 @@ import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
+import com.wangzh.vultr.others.listener.OnBackPressedListsner;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.RequestType;
@@ -56,6 +57,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     protected SupportedAppFragment supportedAppFragment;
     protected MineAppFragment mineAppFragment;
 
+    protected OnBackPressedListsner mOnBackPressedListsner;
 
     protected abstract void initContent();
 
@@ -78,6 +80,10 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     public MainPresenter getMainPresenter(){
         return mMainPresenter;
+    }
+
+    protected void setBackPressedListener(OnBackPressedListsner listener){
+        this.mOnBackPressedListsner = listener;
     }
 
     @Override
@@ -111,6 +117,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 toolbar.setTitle("Supported App");
                 supportedAppFragment = new SupportedAppFragment();
                 showFragment(mFrameContainer.getId(),supportedAppFragment, ConstValues.FRAGMENT_SUPPORTEDAPP);
+                setBackPressedListener(mineAppFragment.getListsner());
                 mMainPresenter.getAppList();
                 break;
             case  R.id.nav_mine:
@@ -141,14 +148,17 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer == null){
-            super.onBackPressed();
-        }
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (mOnBackPressedListsner!=null && !mOnBackPressedListsner.onBackButtonPressed()){
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer == null) {
+                super.onBackPressed();
+            }
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 }

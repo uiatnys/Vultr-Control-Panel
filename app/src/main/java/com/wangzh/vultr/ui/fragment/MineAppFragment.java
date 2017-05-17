@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ScrollView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wangzh.vultr.R;
@@ -15,6 +16,7 @@ import com.wangzh.vultr.app.MainApplication;
 import com.wangzh.vultr.model.entity.MineVpsDataVO;
 import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
+import com.wangzh.vultr.others.listener.OnBackPressedListsner;
 import com.wangzh.vultr.others.utils.CommonItemDecoration;
 import com.wangzh.vultr.others.widget.AnimatedSvgView.AnimatedSvgView;
 import com.wangzh.vultr.ui.MainActivity;
@@ -31,7 +33,7 @@ import butterknife.BindView;
 public class MineAppFragment extends BaseFragment
         implements SwipeRefreshLayout.OnRefreshListener
         ,AnimatedSvgView.OnStateChangeListener
-        ,BaseQuickAdapter.OnItemClickListener{
+        ,BaseQuickAdapter.OnItemClickListener,OnBackPressedListsner {
 
     @BindView(R.id.srl_list)
     SwipeRefreshLayout mSrl;
@@ -39,6 +41,8 @@ public class MineAppFragment extends BaseFragment
     RecyclerView mRvMineApp;
     @BindView(R.id.vs_detail)
     ViewStub mViewStub;
+    ScrollView mScrollView;
+
     private AnimatedSvgView mAnimatedSvgView;
     private MineAppAdapter mMineAppAdapter;
     private List<MineVpsDataVO> mMineVpsDataVOs;
@@ -67,6 +71,10 @@ public class MineAppFragment extends BaseFragment
         }catch (Exception e){
             Log.e("AnimatedSvgVie",e.getMessage());
         }
+    }
+
+    public OnBackPressedListsner getListsner(){
+        return this;
     }
 
     @Override
@@ -106,8 +114,22 @@ public class MineAppFragment extends BaseFragment
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        mViewStub.inflate();
+        if (mViewStub.getParent() != null){
+            mViewStub.inflate();
+        }
         mViewStub.setVisibility(View.VISIBLE);
+        mScrollView = (ScrollView) mRootView.findViewById(R.id.ll_mineapp_container);
+        mScrollView.setVisibility(View.VISIBLE);
         mSrl.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onBackButtonPressed() {
+        if (mScrollView.getVisibility() == View.VISIBLE){
+            mViewStub.setVisibility(View.GONE);
+            mSrl.setVisibility(View.VISIBLE);
+            return true;
+        }
+        return false;
     }
 }

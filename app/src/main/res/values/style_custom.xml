@@ -20,4 +20,11 @@
         <item name="android:textSize">18dp</item>
         <item name="android:layout_weight">0.6</item>
     </style>
+    <style name="style_mineapp_subcontainer">
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 </resources>

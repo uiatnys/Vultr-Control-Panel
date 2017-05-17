@@ -31,6 +31,8 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     private String API_KEY ="";
 
+
+
     @Override
     protected void initContent() {
         //activity跳转动画，存在bug
@@ -55,6 +57,7 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         mMainPresenter = (MainPresenter) presenter;
         mineAppFragment = new MineAppFragment();
         showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
+        setBackPressedListener(mineAppFragment.getListsner());
         if (getIntent().getFlags() == 0){
             mAlertDialog = mAlertDialogBuilder.createDialogStyleA(this,"ApiKey Check", R.layout.edt_dialoginput);
             mAlertDialog.show();
