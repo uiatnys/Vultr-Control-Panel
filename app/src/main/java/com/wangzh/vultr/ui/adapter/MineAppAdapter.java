@@ -29,6 +29,9 @@ public class MineAppAdapter extends BaseQuickAdapter<MineVpsDataVO,BaseViewHolde
         helper.setText(R.id.tv_label, StringUtil.replaceNull(item.getLabel()))
                 .setText(R.id.tv_location,StringUtil.replaceNull(item.getLocation()))
                 .setText(R.id.tv_os,StringUtil.replaceNull(item.getOs()))
-                .setText(R.id.tv_ip,StringUtil.replaceNull(item.getMain_ip()));
+                .setText(R.id.tv_ip,StringUtil.replaceNull(item.getMain_ip()))
+                .setText(R.id.tv_status,StringUtil.replaceNull(item.getStatus()))
+                .setText(R.id.tv_serverstatus,StringUtil.replaceNull(item.getServer_state()))
+                .setText(R.id.tv_powerstatus,StringUtil.replaceNull(item.getPower_status()));
     }
 }

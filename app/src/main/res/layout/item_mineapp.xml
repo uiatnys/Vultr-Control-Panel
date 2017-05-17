@@ -3,7 +3,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="170dp"
     cardview:cardCornerRadius="20dp"
     cardview:cardElevation="5dp"
     cardview:contentPadding="15dp">
@@ -15,69 +15,120 @@
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Label:"/>
-            <TextView
-                android:id="@+id/tv_label"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/color_primarytext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_centerVertical="true"
+                android:layout_width="0dp"
+                android:scaleType="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:text="Label:"/>
+                    <TextView
+                        android:id="@+id/tv_label"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/color_primarytext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:text="Ip:"/>
+                    <TextView
+                        android:id="@+id/tv_ip"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/color_primarytext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <TextView
-                android:text="Location:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tv_location"
-                android:textColor="@color/color_primarytext"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:text="Location:"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:textColor="@color/color_primarytext"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:layout_weight="1">
+                <TextView
+                    android:text="OS:"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_os"
+                    android:textColor="@color/color_primarytext"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="20dp"
             android:orientation="horizontal">
             <TextView
-                android:text="OS:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/tv_status"
+                android:layout_width="0dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_mineapp_status"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
             <TextView
-                android:id="@+id/tv_os"
-                android:textColor="@color/color_primarytext"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/tv_serverstatus"
+                android:layout_width="0dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_mineapp_server"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_powerstatus"
+                android:layout_width="0dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_mineapp_power"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
-        <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <TextView
-            android:text="IP:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tv_ip"
-            android:textColor="@color/color_primarytext"
-            android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
