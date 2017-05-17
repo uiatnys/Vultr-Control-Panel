@@ -5,7 +5,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wangzh.vultr.R;
@@ -26,13 +28,17 @@ import butterknife.BindView;
  * Created by 99210 on 2017/5/13.
  */
 
-public class MineAppFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,AnimatedSvgView.OnStateChangeListener{
+public class MineAppFragment extends BaseFragment
+        implements SwipeRefreshLayout.OnRefreshListener
+        ,AnimatedSvgView.OnStateChangeListener
+        ,BaseQuickAdapter.OnItemClickListener{
 
     @BindView(R.id.srl_list)
     SwipeRefreshLayout mSrl;
     @BindView(R.id.recycl_mine_app)
     RecyclerView mRvMineApp;
-
+    @BindView(R.id.vs_detail)
+    ViewStub mViewStub;
     private AnimatedSvgView mAnimatedSvgView;
     private MineAppAdapter mMineAppAdapter;
     private List<MineVpsDataVO> mMineVpsDataVOs;
@@ -46,12 +52,13 @@ public class MineAppFragment extends BaseFragment implements SwipeRefreshLayout.
     void initView() {
         mSrl.setOnRefreshListener(this);
         mSrl.setColorSchemeColors(ConstValues.COLOR_SWIPEREFRESH_1,ConstValues.COLOR_SWIPEREFRESH_2,ConstValues.COLOR_SWIPEREFRESH_3);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mActivity);
         mRvMineApp.setLayoutManager(manager);
         mRvMineApp.setHasFixedSize(true);
         mRvMineApp.addItemDecoration(new CommonItemDecoration(20,40,20,0));
         mMineAppAdapter = new MineAppAdapter(null);
         mRvMineApp.setAdapter(mMineAppAdapter);
+        mMineAppAdapter.setOnItemClickListener(this);
         mMineAppAdapter.setEmptyView(R.layout.layout_emptyview, (ViewGroup) mRvMineApp.getParent());
         try {
             mAnimatedSvgView = (AnimatedSvgView)mMineAppAdapter.getEmptyView().findViewById(R.id.svg_load);
@@ -87,7 +94,7 @@ public class MineAppFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-        ((MainActivity)getActivity()).getMainPresenter().getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
+        ((MainActivity)mActivity).getMainPresenter().getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
     }
 
     @Override
@@ -95,5 +102,12 @@ public class MineAppFragment extends BaseFragment implements SwipeRefreshLayout.
         if (state == AnimatedSvgView.STATE_FINISHED && mAnimatedSvgView != null) {
             mAnimatedSvgView.start();
         }
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        mViewStub.inflate();
+        mViewStub.setVisibility(View.VISIBLE);
+        mSrl.setVisibility(View.GONE);
     }
 }

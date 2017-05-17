@@ -1,6 +1,8 @@
 package com.wangzh.vultr.ui.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +18,19 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
+    protected Activity mActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        this.mActivity = (Activity) context;
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        mActivity = null;
+        super.onDetach();
+    }
 
     @Nullable
     @Override

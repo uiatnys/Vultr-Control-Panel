@@ -45,7 +45,7 @@ public class SupportedAppFragment extends BaseFragment implements SwipeRefreshLa
     void initView() {
         mSrl.setOnRefreshListener(this);
         mSrl.setColorSchemeColors(ConstValues.COLOR_SWIPEREFRESH_1,ConstValues.COLOR_SWIPEREFRESH_2,ConstValues.COLOR_SWIPEREFRESH_3);
-        GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager manager = new GridLayoutManager(mActivity,2);
         mRv.setLayoutManager(manager);
         mRv.setHasFixedSize(true);
         mRv.addItemDecoration(new CommonItemDecoration(20,40,20,0));
@@ -88,7 +88,7 @@ public class SupportedAppFragment extends BaseFragment implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        ((MainActivity)getActivity()).getMainPresenter().getAppList();
+        ((MainActivity)mActivity).getMainPresenter().getAppList();
     }
 
     @Override
