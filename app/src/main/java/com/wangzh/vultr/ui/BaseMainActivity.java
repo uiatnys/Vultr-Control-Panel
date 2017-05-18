@@ -117,13 +117,13 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 toolbar.setTitle("Supported App");
                 supportedAppFragment = new SupportedAppFragment();
                 showFragment(mFrameContainer.getId(),supportedAppFragment, ConstValues.FRAGMENT_SUPPORTEDAPP);
-                setBackPressedListener(mineAppFragment.getListsner());
                 mMainPresenter.getAppList();
                 break;
             case  R.id.nav_mine:
                 toolbar.setTitle("Mine App");
                 mineAppFragment = new MineAppFragment();
                 showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
+                setBackPressedListener(mineAppFragment.getListsner());
                 mMainPresenter.getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
                 break;
             case  R.id.nav_manage:

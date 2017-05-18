@@ -77,7 +77,7 @@ public class SupportedAppFragment extends BaseFragment implements SwipeRefreshLa
                 setRefreshFinished();
                 mSupportedAppAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
             }
-        },1000);
+        },ConstValues.REQUEST_NET_DELAY);
     }
 
     public void setRefreshFinished(){

@@ -24,4 +24,6 @@ public class ConstValues {
 
     public static final int REQUEST_CODE_FROM_ACCOUNT = 0;
     public static final int RESULT_CODE_FROM_ACCOUNT = 1;
+
+    public static final int REQUEST_NET_DELAY = 1000;
 }

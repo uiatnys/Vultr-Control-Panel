@@ -27,4 +27,17 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <style name="style_mineapp_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="style_mineapp_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

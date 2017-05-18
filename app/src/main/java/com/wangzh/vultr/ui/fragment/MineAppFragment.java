@@ -97,7 +97,7 @@ public class MineAppFragment extends BaseFragment
                 setRefreshFinished();
                 mMineAppAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
             }
-        },1000);
+        },ConstValues.REQUEST_NET_DELAY);
     }
 
     @Override
@@ -125,6 +125,9 @@ public class MineAppFragment extends BaseFragment
 
     @Override
     public boolean onBackButtonPressed() {
+        if(mScrollView == null){
+            return false;
+        }
         if (mScrollView.getVisibility() == View.VISIBLE){
             mViewStub.setVisibility(View.GONE);
             mSrl.setVisibility(View.VISIBLE);
