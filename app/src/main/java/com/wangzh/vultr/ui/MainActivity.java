@@ -31,8 +31,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     private String API_KEY ="";
 
-
-
     @Override
     protected void initContent() {
         //activity跳转动画，存在bug
@@ -68,11 +66,12 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         }
     }
 
+    public String getApiKey(){
+        return  MainApplication.getSpUtils().getString(SPConst.SP_APIKEY,API_KEY);
+    }
+
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
-        Toasty.warning(this, failMsg.getMessage().contains(":")
-                ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
-                :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
         switch (failMsg.getType()){
             case REQUESTTYPE_GETACCOUNTINFOBYKEY:
                 MainApplication.getSpUtils().put(SPConst.SP_APIKEY,"");
@@ -87,8 +86,14 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
                 break;
             case REQUESTTYPE_GETMINEVPSDATA:
                 break;
+            case REQUESTTYPE_OPERATEBACKUP:
+                Toasty.error(this, "Operate Backup Failed!", Toast.LENGTH_LONG, true).show();
+                onOperateBackupSuccess(false);
+                return;
         }
-
+        Toasty.warning(this, failMsg.getMessage().contains(":")
+                ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
+                :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
     }
 
     private void getAuthInfo(){
@@ -129,5 +134,13 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
     @Override
     public void onGetMineVpsDataSuccess(List<MineVpsDataVO> mineVpsDataVOList) {
         mineAppFragment.setData(mineVpsDataVOList);
+    }
+
+    @Override
+    public void onOperateBackupSuccess(boolean result) {
+        //TODO 应该是vultr接口原因，启用与禁用备份均返回403
+        if (mineAppFragment.isVisible() && !result){
+            mineAppFragment.resetBackupSwitch();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.wangzh.vultr.presenter;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
@@ -159,6 +161,29 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
             @Override
             public void onFail(HttpErrorVo msg) {
                 msg.setType(REQUESTTYPE_GETMINEVPSDATA);
+                view.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                view.onFinish();
+            }
+        });
+    }
+
+    public void enableBackup(String subid,String apikey,boolean isEnable){
+
+        addSubscribe(isEnable?mApiWithJson.enableBackup(subid, apikey)
+                :mApiWithJson.disableBackup(subid, apikey)
+                ,new CallBack<Object>() {
+            @Override
+            public void onSuccess(Object o) {
+                Log.e("",o.toString());
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_OPERATEBACKUP);
                 view.getDataFail(msg);
             }
 

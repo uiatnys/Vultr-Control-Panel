@@ -17,4 +17,5 @@ public interface MainViewI extends BaseViewI {
     void onGetAuthInfoSuccess(AuthInfoDTO dto);
     void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists);
     void onGetMineVpsDataSuccess(List<MineVpsDataVO> mineVpsDataVOList);
+    void onOperateBackupSuccess(boolean result);
 }

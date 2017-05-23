@@ -3,7 +3,10 @@ package com.wangzh.vultr.model.net;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -21,7 +24,7 @@ public interface Api {
      * @return
      */
     @GET("v1/account/info")
-    Observable<AccountInfoDTO> getAccountInfo(@Query("api_key") String apiKey);
+    Observable<AccountInfoDTO>  getAccountInfo(@Query("api_key") String apiKey);
 
     @GET("/v1/auth/info")
     Observable<AuthInfoDTO> getAuthInfo(@Query("api_key") String apikey);
@@ -31,4 +34,12 @@ public interface Api {
 
     @GET("/v1/server/list")
     Observable<Object> getMineVpsData(@Query("api_key") String apikey);
+
+    @FormUrlEncoded
+    @POST("/v1/server/backup_enable")
+    Observable<Object> enableBackup(@Field("SUBID") String subid,@Field("api_key") String apikey);
+
+    @FormUrlEncoded
+    @POST("/v1/server/backup_disable")
+    Observable<Object> disableBackup(@Field("SUBID") String subid,@Field("api_key") String apikey);
 }

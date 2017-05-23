@@ -10,4 +10,5 @@ public interface RequestType {
     String REQUESTTYPE_GETAUTHINFO = "getAuthInfo";
     String REQUESTTYPE_GETAPPLIST = "getAppList";
     String REQUESTTYPE_GETMINEVPSDATA = "getMineVpsData";
+    String REQUESTTYPE_OPERATEBACKUP = "operatebackup";
 }

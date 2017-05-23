@@ -181,9 +181,13 @@ public class MineAppFragment extends BaseFragment
         mViewStubHolder.mSwBackup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                ((MainActivity)mActivity).getMainPresenter().enableBackup(vo.getSUBID(),((MainActivity)mActivity).getApiKey(),true);
             }
         });
+    }
+
+    public void resetBackupSwitch(){
+        mViewStubHolder.mSwBackup.setChecked(mViewStubHolder.mSwBackup.isChecked()?false:true);
     }
 
     class ViewStubHolder{
