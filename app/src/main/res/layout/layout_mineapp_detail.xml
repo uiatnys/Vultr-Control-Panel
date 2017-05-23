@@ -16,12 +16,11 @@
         <LinearLayout
             style="@style/style_mineapp_subcontainer">
             <TextView
-               style="@style/style_mineapp_title"
+                style="@style/style_mineapp_title"
                 android:text="Label:"/>
             <TextView
-                android:id="@+id/tv_label"
-                style="@style/style_mineapp_content"
-                android:layout_width="match_parent"/>
+                android:id="@+id/tv_detail_label"
+                style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
 
@@ -31,7 +30,7 @@
                 style="@style/style_mineapp_title"
                 android:text="Tag:"/>
             <TextView
-                android:id="@+id/tv_tag"
+                android:id="@+id/tv_detail_tag"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
 
@@ -42,7 +41,7 @@
                 style="@style/style_mineapp_title"
                 android:text="Location:"/>
             <TextView
-                android:id="@+id/tv_location"
+                android:id="@+id/tv_detail_location"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
@@ -52,7 +51,7 @@
                 style="@style/style_mineapp_title"
                 android:text="Operating System:"/>
             <TextView
-                android:id="@+id/tv_os"
+                android:id="@+id/tv_detail_os"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
@@ -96,7 +95,7 @@
                 style="@style/style_mineapp_title"
                 android:text="Ip:"/>
             <TextView
-                android:id="@+id/tv_ip"
+                android:id="@+id/tv_detail_ip"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
 
@@ -142,7 +141,7 @@
                 style="@style/style_mineapp_title"
                 android:text="Status:"/>
             <TextView
-                android:id="@+id/tv_statuc"
+                android:id="@+id/tv_detail_status"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
@@ -230,9 +229,26 @@
             <TextView
                 style="@style/style_mineapp_title"
                 android:text="Password:"/>
-            <TextView
-                android:id="@+id/tv_password"
-                style="@style/style_mineapp_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+                <TextView
+                    android:id="@+id/tv_password"
+                    android:layout_alignParentLeft="true"
+                    style="@style/style_mineapp_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"/>
+                <ImageView
+                    android:id="@+id/iv_showpwd"
+                    android:layout_toRightOf="@+id/tv_password"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mineapp_showpwd"/>
+            </RelativeLayout>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

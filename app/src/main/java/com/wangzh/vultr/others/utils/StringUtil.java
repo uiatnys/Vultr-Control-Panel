@@ -14,4 +14,23 @@ public class StringUtil {
         }
         return value;
     }
+
+    public static String replactNullToZero(String value){
+        if (TextUtils.isEmpty(value)){
+            return "0";
+        }
+        return value;
+    }
+
+    public static String stringToStar(String value){
+        if (TextUtils.isEmpty(value)){
+            return "";
+        }
+        int length = value.length();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0;i<length;i++){
+            stringBuilder.append("*");
+        }
+        return stringBuilder.toString();
+    }
 }
