@@ -5,19 +5,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            android:background="@color/color_ffffff">
+            android:background="@color/color_common_list_background">
     <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-           style="@style/style_mineapp_subcontainer">
+            style="@style/style_mineapp_subcontainer">
             <TextView
                style="@style/style_mineapp_title"
                 android:text="Label:"/>
             <TextView
                 android:id="@+id/tv_label"
-                style="@style/style_mineapp_content"/>
+                style="@style/style_mineapp_content"
+                android:layout_width="match_parent"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
 
@@ -30,9 +34,9 @@
                 android:id="@+id/tv_tag"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
-        <include layout="@layout/common_divide_line"/>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -41,7 +45,7 @@
                 android:id="@+id/tv_location"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
-
+        <include layout="@layout/common_divide_line"/>
         <LinearLayout
             style="@style/style_mineapp_subcontainer">
             <TextView
@@ -86,8 +90,6 @@
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
 
-        <include layout="@layout/common_divide_line"/>
-
         <LinearLayout
             style="@style/style_mineapp_subcontainer">
             <TextView
@@ -97,14 +99,50 @@
                 android:id="@+id/tv_ip"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
+
         <include layout="@layout/common_divide_line"/>
 
         <LinearLayout
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
-                android:text="Label:"/>
+                android:text="Subnet:"/>
             <TextView
+                android:id="@+id/tv_subnet"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+        <include layout="@layout/common_divide_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center_vertical"
+            android:background="@color/color_ffffff">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:text="Auto Backup:"/>
+
+            <Switch
+                android:id="@+id/switch_backup"
+                android:layout_gravity="right|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Status:"/>
+            <TextView
+                android:id="@+id/tv_statuc"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
@@ -113,8 +151,9 @@
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
-                android:text="Label:"/>
+                android:text="Server State:"/>
             <TextView
+                android:id="@+id/tv_serverstate"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
@@ -123,11 +162,80 @@
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
-                android:text="Label:"/>
+                android:text="Power Status:"/>
             <TextView
+                android:id="@+id/tv_pwoerstatus"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Used Bandwith:"/>
+            <TextView
+                android:id="@+id/tv_used"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+
+        <include layout="@layout/common_divide_line"/>
+        <LinearLayout
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Allowed Bandwith:"/>
+            <TextView
+                android:id="@+id/tv_allowed"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Created Date:"/>
+            <TextView
+                android:id="@+id/tv_createddate"
                 style="@style/style_mineapp_content"/>
         </LinearLayout>
         <include layout="@layout/common_divide_line"/>
 
+        <LinearLayout
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Charge:"/>
+            <TextView
+                android:id="@+id/tv_charge"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+        <include layout="@layout/common_divide_line"/>
+
+        <LinearLayout
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Cost Per Month:"/>
+            <TextView
+                android:id="@+id/tv_monthcost"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            style="@style/style_mineapp_subcontainer">
+            <TextView
+                style="@style/style_mineapp_title"
+                android:text="Password:"/>
+            <TextView
+                android:id="@+id/tv_password"
+                style="@style/style_mineapp_content"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
     </LinearLayout>
 </ScrollView>

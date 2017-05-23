@@ -110,7 +110,7 @@ public class AccountActivity extends BasePresenterActivity {
             public void onAnimationEnd(Animator animator) {
                 if (!isEnter){
                     setResult(ConstValues.RESULT_CODE_FROM_ACCOUNT,new Intent().putExtra("title",getIntent().getStringExtra("title")));
-                    AccountActivity.super.onBackPressed();
+                    finish();
                 }
                 isClickable = true;
             }

@@ -120,6 +120,7 @@ public class MineAppFragment extends BaseFragment
         mViewStub.setVisibility(View.VISIBLE);
         mScrollView = (ScrollView) mRootView.findViewById(R.id.ll_mineapp_container);
         mScrollView.setVisibility(View.VISIBLE);
+        mScrollView.scrollTo(0,0);
         mSrl.setVisibility(View.GONE);
     }
 

@@ -26,6 +26,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/color_ffffff</item>
     </style>
     <style name="style_mineapp_title">
         <item name="android:layout_width">match_parent</item>
