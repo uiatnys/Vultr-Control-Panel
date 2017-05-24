@@ -15,4 +15,5 @@
     <color name="color_ff000000">#ff000000</color>
     <color name="color_293A48">#293A48</color>
     <color name="color_ffffff">#ffffff</color>
+    <color name="color_transparent">#00000000</color>
 </resources>

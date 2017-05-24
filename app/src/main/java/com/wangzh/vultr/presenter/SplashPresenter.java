@@ -17,7 +17,7 @@ public class SplashPresenter extends BasePresenter<SplashViewI> implements Reque
 
 
     public void getAccountInfoByKey(String apiKey){
-        addSubscribe(mApiWithJson.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>() {
+        addSubscribe(mApiWithJson.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>(null) {
             @Override
             public void onSuccess(AccountInfoDTO o) {
                 view.onCheckApiKeySuccess(o);

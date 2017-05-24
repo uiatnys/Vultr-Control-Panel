@@ -181,13 +181,18 @@ public class MineAppFragment extends BaseFragment
         mViewStubHolder.mSwBackup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ((MainActivity)mActivity).getMainPresenter().enableBackup(vo.getSUBID(),((MainActivity)mActivity).getApiKey(),true);
+                if (mViewStubHolder.mSwBackup.getTag()!=null
+                        && mViewStubHolder.mSwBackup.getTag().toString().equals("clickableTrue")){
+                    mViewStubHolder.mSwBackup.setTag("clickableFalse");
+                    ((MainActivity)mActivity).getMainPresenter().enableBackup(mActivity,vo.getSUBID(),((MainActivity)mActivity).getApiKey(),true);
+                }
             }
         });
     }
 
     public void resetBackupSwitch(){
         mViewStubHolder.mSwBackup.setChecked(mViewStubHolder.mSwBackup.isChecked()?false:true);
+        mViewStubHolder.mSwBackup.setTag("clickableTrue");
     }
 
     class ViewStubHolder{

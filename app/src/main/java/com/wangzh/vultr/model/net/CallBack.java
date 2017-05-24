@@ -1,6 +1,8 @@
 package com.wangzh.vultr.model.net;
 
 
+import android.app.ProgressDialog;
+
 import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.others.constants.ConstValues;
 
@@ -19,9 +21,22 @@ public abstract class CallBack<Model> extends Subscriber<Model> {
     public abstract void onFail(HttpErrorVo msg);
     public abstract void onFinish();
 
+    private ProgressDialog mProgressDialog;
+
+    public CallBack(ProgressDialog progressDialog){
+        this.mProgressDialog = progressDialog;
+    }
+
+    public void hideProgress(){
+        if (mProgressDialog!=null && mProgressDialog.isShowing()){
+            mProgressDialog.dismiss();
+        }
+    }
+
     @Override
     public void onCompleted() {
         onFinish();
+        hideProgress();
     }
 
     @Override
@@ -39,10 +54,12 @@ public abstract class CallBack<Model> extends Subscriber<Model> {
             onFail(vo);
         }
         onFinish();
+        hideProgress();
     }
 
     @Override
     public void onNext(Model model) {
         onSuccess(model);
+        hideProgress();
     }
 }

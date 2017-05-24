@@ -68,7 +68,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     @Override
     protected BasePresenter createPresenter() {
-        return new MainPresenter(this);
+        return new MainPresenter(this,this);
     }
 
     @Override

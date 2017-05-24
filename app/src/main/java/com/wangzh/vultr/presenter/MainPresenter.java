@@ -1,9 +1,13 @@
 package com.wangzh.vultr.presenter;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
+import android.view.Window;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.wangzh.vultr.R;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import com.wangzh.vultr.model.entity.HttpErrorVo;
@@ -23,12 +27,17 @@ import java.util.Map;
 
 public class MainPresenter extends BasePresenter<MainViewI> implements RequestType{
 
-    public MainPresenter(MainViewI mainViewI){
+    ProgressDialog mProgressDialog;
+
+    public MainPresenter(Context context,MainViewI mainViewI){
         attachView(mainViewI);
+        mProgressDialog = new ProgressDialog(context,R.style.ProgressDialogStyle);
+        mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mProgressDialog.setCancelable(false);
     }
 
     public void getAccountInfoByKey(String apiKey){
-        addSubscribe(mApiWithJson.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>() {
+        addSubscribe(mApiWithJson.getAccountInfo(apiKey), new CallBack<AccountInfoDTO>(null) {
             @Override
             public void onSuccess(AccountInfoDTO o) {
                 view.onCheckApiKeySuccess(o);
@@ -48,7 +57,7 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
     }
 
     public void getAuthInfo(String apiKey){
-        addSubscribe(mApiWithJson.getAuthInfo(apiKey), new CallBack<AuthInfoDTO>() {
+        addSubscribe(mApiWithJson.getAuthInfo(apiKey), new CallBack<AuthInfoDTO>(null) {
             @Override
             public void onSuccess(AuthInfoDTO o) {
                 view.onGetAuthInfoSuccess(o);
@@ -68,7 +77,7 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
     }
 
     public void getAppList(){
-        addSubscribe(mApiWithJson.getAppList(),new CallBack<Object>(){
+        addSubscribe(mApiWithJson.getAppList(),new CallBack<Object>(null){
 
             @Override
             public void onSuccess(Object o) {
@@ -101,7 +110,7 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
     }
 
     public void getMineVpsData(String apiKey){
-        addSubscribe(mApiWithJson.getMineVpsData(apiKey), new CallBack<Object>() {
+        addSubscribe(mApiWithJson.getMineVpsData(apiKey), new CallBack<Object>(null) {
             @Override
             public void onSuccess(Object o) {
                 JSONObject jsonObject = (JSONObject) o;
@@ -171,26 +180,27 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
         });
     }
 
-    public void enableBackup(String subid,String apikey,boolean isEnable){
-
+    public void enableBackup(Context context, String subid, String apikey, boolean isEnable){
+        mProgressDialog.show();
+        mProgressDialog.setContentView(R.layout.layout_progress);
         addSubscribe(isEnable?mApiWithJson.enableBackup(subid, apikey)
-                :mApiWithJson.disableBackup(subid, apikey)
-                ,new CallBack<Object>() {
-            @Override
-            public void onSuccess(Object o) {
-                Log.e("",o.toString());
-            }
+                        :mApiWithJson.disableBackup(subid, apikey)
+                ,new CallBack<Object>(mProgressDialog) {
+                    @Override
+                    public void onSuccess(Object o) {
+                        Log.e("",o.toString());
+                    }
 
-            @Override
-            public void onFail(HttpErrorVo msg) {
-                msg.setType(REQUESTTYPE_OPERATEBACKUP);
-                view.getDataFail(msg);
-            }
+                    @Override
+                    public void onFail(HttpErrorVo msg) {
+                        msg.setType(REQUESTTYPE_OPERATEBACKUP);
+                        view.getDataFail(msg);
+                    }
 
-            @Override
-            public void onFinish() {
-                view.onFinish();
-            }
-        });
+                    @Override
+                    public void onFinish() {
+                        view.onFinish();
+                    }
+                });
     }
 }
