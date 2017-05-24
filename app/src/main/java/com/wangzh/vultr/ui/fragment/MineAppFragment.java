@@ -55,6 +55,8 @@ public class MineAppFragment extends BaseFragment
     private List<MineVpsDataVO> mMineVpsDataVOs;
     private ViewStubHolder mViewStubHolder;
 
+    private MineVpsDataVO currentMineVpsVo;
+
     @Override
     int getRootView() {
         return R.layout.fragment_mineapp;
@@ -126,12 +128,18 @@ public class MineAppFragment extends BaseFragment
             mViewStub.inflate();
             mViewStubHolder = new ViewStubHolder(mRootView);
         }
+        this.currentMineVpsVo = mMineVpsDataVOs.get(position);
         mScrollView = (ScrollView) mRootView.findViewById(R.id.ll_mineapp_container);
         mViewStub.setVisibility(View.VISIBLE);
         mScrollView.setVisibility(View.VISIBLE);
         mScrollView.scrollTo(0,0);
         mSrl.setVisibility(View.GONE);
-        initDetailData(mMineVpsDataVOs.get(position));
+        initDetailData(currentMineVpsVo);
+        ((MainActivity)mActivity).inflateMenuOption(R.menu.menu_mineapp);
+    }
+
+    public MineVpsDataVO getCurrentVo(){
+        return currentMineVpsVo;
     }
 
     @Override
@@ -142,6 +150,7 @@ public class MineAppFragment extends BaseFragment
         if (mScrollView.getVisibility() == View.VISIBLE){
             mViewStub.setVisibility(View.GONE);
             mSrl.setVisibility(View.VISIBLE);
+            ((MainActivity)mActivity).clearMenu();
             return true;
         }
         return false;

@@ -136,6 +136,7 @@
             <Switch
                 android:id="@+id/switch_backup"
                 android:tag="clickableTrue"
+                android:checked="false"
                 android:layout_gravity="right|center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

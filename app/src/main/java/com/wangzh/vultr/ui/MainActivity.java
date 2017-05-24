@@ -29,8 +29,6 @@ import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseMainActivity implements AlertDialogBuilder.AlertDialogOkClickListener{
 
-    private String API_KEY ="";
-
     @Override
     protected void initContent() {
         //activity跳转动画，存在bug

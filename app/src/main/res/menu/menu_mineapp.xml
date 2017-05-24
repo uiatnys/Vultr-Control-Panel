@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/action_console"
+            android:title="@string/action_console"
+            app:showAsAction="never"/>
+    </group>
+    <group>
+        <item android:id="@+id/action_stop"
+              android:title="@string/action_stop"
+              app:showAsAction="never"/>
+        <item android:id="@+id/action_restart"
+              android:title="@string/action_restart"
+              app:showAsAction="never"/>
+        <item android:id="@+id/action_reinstall"
+              android:title="@string/action_reinstall"
+              app:showAsAction="never"/>
+        <item android:id="@+id/action_destroy"
+              android:title="@string/action_destroy"
+              app:showAsAction="never"/>
+    </group>
+</menu>

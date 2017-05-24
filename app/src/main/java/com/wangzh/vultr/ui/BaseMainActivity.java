@@ -1,6 +1,7 @@
 package com.wangzh.vultr.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -47,12 +48,15 @@ public abstract class BaseMainActivity extends BasePresenterActivity
     @BindView(R.id.fl_main_content_container)
     FrameLayout mFrameContainer;
 
+    protected String API_KEY ="";
+
     protected AlertDialogBuilder mAlertDialogBuilder;
     protected AlertDialog mAlertDialog;
     protected MainPresenter mMainPresenter;
     protected AccountInfoDTO mAccountInfoDTO;
     protected AuthInfoDTO mAuthInfoDTO;
     protected Intent mIntent;
+    protected Menu mMenu;
 
     protected SupportedAppFragment supportedAppFragment;
     protected MineAppFragment mineAppFragment;
@@ -73,8 +77,9 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        this.mMenu = menu;
+        getMenuInflater().inflate(R.menu.menu_mineapp, menu);
+        menu.clear();
         return true;
     }
 
@@ -88,16 +93,33 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_console:
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.setData(Uri.parse(mineAppFragment.getCurrentVo().getKvm_url()));
+                startActivity(intent);
+                return true;
+            case R.id.action_stop:
+                mMainPresenter.stopMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),API_KEY);
+                return true;
+            case R.id.action_restart:
+                return true;
+            case R.id.action_reinstall:
+                return true;
+            case R.id.action_destroy:
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void inflateMenuOption(int menuid){
+        clearMenu();
+        getMenuInflater().inflate(menuid,mMenu);
+    }
+
+    public void clearMenu(){
+        mMenu.clear();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

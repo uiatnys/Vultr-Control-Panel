@@ -42,4 +42,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("/v1/server/backup_disable")
     Observable<Object> disableBackup(@Field("SUBID") String subid,@Field("api_key") String apikey);
+
+    @FormUrlEncoded
+    @POST("/v1/server/halt")
+    Observable<Object> stopServer(@Field("subid") String subid,@Field("api_key") String apiley);
 }

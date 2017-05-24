@@ -13,4 +13,10 @@
    <integer-array name="svg_load_color">
         <item>@color/color_293A48</item>
     </integer-array>
+
+    <string name="action_console">Console</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_restart">Restart</string>
+    <string name="action_reinstall">Reinstall</string>
+    <string name="action_destroy">Destroy</string>
 </resources>

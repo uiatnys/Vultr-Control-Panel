@@ -11,4 +11,5 @@ public interface RequestType {
     String REQUESTTYPE_GETAPPLIST = "getAppList";
     String REQUESTTYPE_GETMINEVPSDATA = "getMineVpsData";
     String REQUESTTYPE_OPERATEBACKUP = "operatebackup";
+    String REQUESTTYPE_STOPSERVER = "stopserver";
 }

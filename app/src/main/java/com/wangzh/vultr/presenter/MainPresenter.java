@@ -203,4 +203,27 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
                     }
                 });
     }
+
+    public void stopMineVps(Context context,String subid,String apikey){
+        mProgressDialog.show();
+        mProgressDialog.setContentView(R.layout.layout_progress);
+        addSubscribe(mApiWithJson.stopServer(subid, apikey), new CallBack<Object>(mProgressDialog) {
+            @Override
+            public void onSuccess(Object o) {
+                Log.e("",o.toString());
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_STOPSERVER);
+                view.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                view.onFinish();
+            }
+        });
+
+    }
 }
