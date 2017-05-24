@@ -64,10 +64,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         }
     }
 
-    public String getApiKey(){
-        return  MainApplication.getSpUtils().getString(SPConst.SP_APIKEY,API_KEY);
-    }
-
     @Override
     public void getDataFail(HttpErrorVo failMsg) {
         switch (failMsg.getType()){
@@ -104,7 +100,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onOkBtnClicked(String value) {
-        this.API_KEY = value;
         mMainPresenter.getAccountInfoByKey(value);
     }
 

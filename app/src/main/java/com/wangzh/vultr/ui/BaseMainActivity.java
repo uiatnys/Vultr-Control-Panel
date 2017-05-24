@@ -101,7 +101,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 startActivity(intent);
                 return true;
             case R.id.action_stop:
-                mMainPresenter.stopMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),API_KEY);
+                mMainPresenter.stopMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
                 return true;
             case R.id.action_restart:
                 return true;
@@ -146,7 +146,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 mineAppFragment = new MineAppFragment();
                 showFragment(mFrameContainer.getId(),mineAppFragment,ConstValues.FRAGMENT_MINEAPP);
                 setBackPressedListener(mineAppFragment.getListsner());
-                mMainPresenter.getMineVpsData(MainApplication.getSpUtils().getString(SPConst.SP_APIKEY));
+                mMainPresenter.getMineVpsData(getApiKey());
                 break;
             case  R.id.nav_manage:
                 break;
@@ -166,6 +166,10 @@ public abstract class BaseMainActivity extends BasePresenterActivity
             toolbar.setTitle(data.getStringExtra("title"));
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public String getApiKey(){
+        return  MainApplication.getSpUtils().getString(SPConst.SP_APIKEY,API_KEY);
     }
 
     @Override

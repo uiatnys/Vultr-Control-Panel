@@ -6,6 +6,7 @@ import com.wangzh.vultr.model.entity.AuthInfoDTO;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -37,13 +38,13 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("/v1/server/backup_enable")
-    Observable<Object> enableBackup(@Field("SUBID") String subid,@Field("api_key") String apikey);
+    Observable<Object> enableBackup(@Field("SUBID") String subid,@Header("API-Key") String apikey);
 
     @FormUrlEncoded
     @POST("/v1/server/backup_disable")
-    Observable<Object> disableBackup(@Field("SUBID") String subid,@Field("api_key") String apikey);
+    Observable<Object> disableBackup(@Field("SUBID") String subid,@Header("API-Key") String apikey);
 
     @FormUrlEncoded
     @POST("/v1/server/halt")
-    Observable<Object> stopServer(@Field("subid") String subid,@Field("api_key") String apiley);
+    Observable<Object> stopServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
 }
