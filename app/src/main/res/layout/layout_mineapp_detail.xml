@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
+            android:background="@drawable/shape_mineapp_detail_topcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -25,6 +26,7 @@
         <include layout="@layout/common_divide_line"/>
 
         <LinearLayout
+            android:background="@drawable/shape_mineapp_detail_bottomcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -36,10 +38,14 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_mineapp_detail_topcorner"
             style="@style/style_mineapp_subcontainer">
+
             <TextView
                 style="@style/style_mineapp_title"
-                android:text="Location:"/>
+                android:text="Location:"
+                android:id="@+id/textView"/>
+
             <TextView
                 android:id="@+id/tv_detail_location"
                 style="@style/style_mineapp_content"/>
@@ -119,7 +125,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:gravity="center_vertical"
-            android:background="@color/color_ffffff">
+            android:background="@drawable/shape_mineapp_detail_bottomcorner">
             <TextView
                 style="@style/style_mineapp_title"
                 android:layout_height="match_parent"
@@ -137,6 +143,7 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_mineapp_detail_topcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -159,6 +166,7 @@
         <include layout="@layout/common_divide_line"/>
 
         <LinearLayout
+            android:background="@drawable/shape_mineapp_detail_bottomcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -171,6 +179,7 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_mineapp_detail_topcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -182,6 +191,7 @@
 
         <include layout="@layout/common_divide_line"/>
         <LinearLayout
+            android:background="@drawable/shape_mineapp_detail_bottomcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -193,6 +203,7 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_mineapp_detail_topcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -215,6 +226,7 @@
         <include layout="@layout/common_divide_line"/>
 
         <LinearLayout
+            android:background="@drawable/shape_mineapp_detail_bottomcorner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
@@ -226,6 +238,7 @@
 
         <LinearLayout
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_mineapp_detail_corner"
             style="@style/style_mineapp_subcontainer">
             <TextView
                 style="@style/style_mineapp_title"
