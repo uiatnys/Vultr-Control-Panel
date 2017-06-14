@@ -29,7 +29,7 @@ public class Request {
             if (BuildConfig.DEBUG) {
                 // Log信息拦截器
                 HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
                 //设置 Debug Log 模式
                 builder.addInterceptor(loggingInterceptor);
             }

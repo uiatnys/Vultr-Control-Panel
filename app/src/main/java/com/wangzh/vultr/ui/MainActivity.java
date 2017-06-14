@@ -100,6 +100,7 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
 
     @Override
     public void onOkBtnClicked(String value) {
+        API_KEY = value;
         mMainPresenter.getAccountInfoByKey(value);
     }
 
