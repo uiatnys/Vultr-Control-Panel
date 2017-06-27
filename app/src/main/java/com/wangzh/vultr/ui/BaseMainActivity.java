@@ -1,7 +1,6 @@
 package com.wangzh.vultr.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -96,8 +95,8 @@ public abstract class BaseMainActivity extends BasePresenterActivity
         switch (item.getItemId()){
             case R.id.action_console:
                 Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                intent.setData(Uri.parse(mineAppFragment.getCurrentVo().getKvm_url()));
+                intent.setClass(mActivity,BrowerActivity.class);
+                intent.putExtra(ConstValues.BROWER_URL,mineAppFragment.getCurrentVo().getKvm_url());
                 startActivity(intent);
                 return true;
             case R.id.action_stop:

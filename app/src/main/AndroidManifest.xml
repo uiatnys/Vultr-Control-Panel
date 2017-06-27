@@ -39,6 +39,8 @@
             android:name=".ui.AccountActivity"
             android:launchMode="singleTop"
             android:theme="@style/style_accountactivity_transparent"/>
+        <activity android:name=".ui.BrowerActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
