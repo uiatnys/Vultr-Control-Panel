@@ -9,15 +9,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.wangzh.vultr.R;
 import com.wangzh.vultr.app.MainApplication;
 import com.wangzh.vultr.model.entity.AccountInfoDTO;
 import com.wangzh.vultr.model.entity.AuthInfoDTO;
+import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.others.constants.SPConst;
 import com.wangzh.vultr.others.listener.OnBackPressedListsner;
+import com.wangzh.vultr.others.utils.HttpResponseUtil;
 import com.wangzh.vultr.presenter.BasePresenter;
 import com.wangzh.vultr.presenter.MainPresenter;
 import com.wangzh.vultr.presenter.RequestType;
@@ -28,6 +32,7 @@ import com.wangzh.vultr.ui.fragment.MineAppFragment;
 import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by WangZH on 2017/4/26.
@@ -103,6 +108,7 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 mMainPresenter.stopMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
                 return true;
             case R.id.action_restart:
+                mMainPresenter.restartMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
                 return true;
             case R.id.action_reinstall:
                 return true;
@@ -185,5 +191,39 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 super.onBackPressed();
             }
         }
+    }
+
+    @Override
+    public void getDataFail(HttpErrorVo failMsg) {
+        switch (failMsg.getType()){
+            case REQUESTTYPE_GETACCOUNTINFOBYKEY:
+                MainApplication.getSpUtils().put(SPConst.SP_APIKEY,"");
+                if (HttpResponseUtil.getCodeMap().containsKey(failMsg.getCode())){
+                    ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("StatusCode-"+failMsg.getCode()+"-Please Check Apikey Correct");
+                }else {
+                    ((EditText)mAlertDialog.findViewById(R.id.edt_input)).setError("Some Wrong,Please Check Your Key Or Net Connection!");
+                }
+                break;
+            case REQUESTTYPE_GETAPPLIST:
+                supportedAppFragment.setError();
+                break;
+            case REQUESTTYPE_GETMINEVPSDATA:
+                break;
+            case REQUESTTYPE_OPERATEBACKUP:
+                Toasty.error(this, "Operate Backup Failed!", Toast.LENGTH_LONG, true).show();
+                onOperateBackupSuccess(false);
+                return;
+            case REQUESTTYPE_STOPSERVER:
+                Toasty.error(this,"Stop Service error!",Toast.LENGTH_LONG,true).show();
+                break;
+            case REQUESTTYPE_RESTARTSERVER:
+                Toasty.error(this,"Restart Service error!",Toast.LENGTH_LONG,true).show();
+                break;
+            case REQUESTTYPE_GETAUTHINFO:
+                break;
+        }
+        Toasty.warning(this, failMsg.getMessage().contains(":")
+                ?failMsg.getMessage().substring(failMsg.getMessage().indexOf(":")+1)
+                :failMsg.getMessage(), Toast.LENGTH_LONG, true).show();
     }
 }

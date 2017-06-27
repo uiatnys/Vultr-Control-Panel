@@ -2,7 +2,6 @@ package com.wangzh.vultr.presenter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.Window;
 
 import com.alibaba.fastjson.JSONArray;
@@ -14,6 +13,7 @@ import com.wangzh.vultr.model.entity.HttpErrorVo;
 import com.wangzh.vultr.model.entity.MineVpsDataVO;
 import com.wangzh.vultr.model.entity.SupportedAppVO;
 import com.wangzh.vultr.model.net.CallBack;
+import com.wangzh.vultr.others.constants.ConstValues;
 import com.wangzh.vultr.presenter.i.MainViewI;
 
 import java.math.BigDecimal;
@@ -34,6 +34,11 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
         mProgressDialog = new ProgressDialog(context,R.style.ProgressDialogStyle);
         mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mProgressDialog.setCancelable(false);
+    }
+
+    private void showProgressDialog(int layout){
+        mProgressDialog.show();
+        mProgressDialog.setContentView(layout);
     }
 
     public void getAccountInfoByKey(String apiKey){
@@ -181,14 +186,13 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
     }
 
     public void enableBackup(Context context, String subid, String apikey, boolean isEnable){
-        mProgressDialog.show();
-        mProgressDialog.setContentView(R.layout.layout_progress);
+        showProgressDialog(R.layout.layout_progress);
         addSubscribe(isEnable?mApiWithJson.enableBackup(subid, apikey)
                         :mApiWithJson.disableBackup(subid, apikey)
                 ,new CallBack<Object>(mProgressDialog) {
                     @Override
                     public void onSuccess(Object o) {
-                        Log.e("",o.toString());
+                        view.onOperateBackupSuccess(true);
                     }
 
                     @Override
@@ -205,12 +209,11 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
     }
 
     public void stopMineVps(Context context,String subid,String apikey){
-        mProgressDialog.show();
-        mProgressDialog.setContentView(R.layout.layout_progress);
+        showProgressDialog(R.layout.layout_progress);
         addSubscribe(mApiWithJson.stopServer(subid, apikey), new CallBack<Object>(mProgressDialog) {
             @Override
             public void onSuccess(Object o) {
-                Log.e("",o.toString());
+                view.onOperateServerSuccess(ConstValues.OPERATE_STOP_SERVER_SUCCESS);
             }
 
             @Override
@@ -225,5 +228,27 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
             }
         });
 
+    }
+
+    public void restartMineVps(Context context,String subid,String apikey){
+        showProgressDialog(R.layout.layout_progress);
+        addSubscribe(mApiWithJson.restartServer(subid,apikey),new CallBack<Object>(mProgressDialog){
+
+            @Override
+            public void onSuccess(Object o) {
+                view.onOperateServerSuccess(ConstValues.OPERATE_RESTART_SERVER_SUCCESS);
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_RESTARTSERVER);
+                view.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                view.onFinish();
+            }
+        });
     }
 }

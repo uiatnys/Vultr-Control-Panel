@@ -28,4 +28,7 @@ public class ConstValues {
     public static final int REQUEST_NET_DELAY = 1000;
 
     public static final String BROWER_URL = "brower_url";
+
+    public static final int OPERATE_STOP_SERVER_SUCCESS = 100;
+    public static final int OPERATE_RESTART_SERVER_SUCCESS = 101;
 }

@@ -47,4 +47,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("/v1/server/halt")
     Observable<Object> stopServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
+
+    @FormUrlEncoded
+    @POST("v1/server/reboot")
+    Observable<Object> restartServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
 }

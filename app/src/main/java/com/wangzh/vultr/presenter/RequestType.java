@@ -12,4 +12,5 @@ public interface RequestType {
     String REQUESTTYPE_GETMINEVPSDATA = "getMineVpsData";
     String REQUESTTYPE_OPERATEBACKUP = "operatebackup";
     String REQUESTTYPE_STOPSERVER = "stopserver";
+    String REQUESTTYPE_RESTARTSERVER = "restartserver";
 }

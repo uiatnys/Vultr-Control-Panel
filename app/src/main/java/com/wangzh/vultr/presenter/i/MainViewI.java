@@ -18,4 +18,5 @@ public interface MainViewI extends BaseViewI {
     void onGetSupportedAppSuccess(List<SupportedAppVO> supportedLists);
     void onGetMineVpsDataSuccess(List<MineVpsDataVO> mineVpsDataVOList);
     void onOperateBackupSuccess(boolean result);
+    void onOperateServerSuccess(int typeCode);
 }
