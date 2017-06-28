@@ -109,6 +109,7 @@ public class SplashActivity extends BasePresenterActivity implements SplashViewI
         List<String> permissionLists = new ArrayList<>();
         permissionLists.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissionLists.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissionLists.add(Manifest.permission.READ_PHONE_STATE);
         List<String> needRequest = new ArrayList<>();
         for (String str:permissionLists) {
             if (ContextCompat.checkSelfPermission(this, str) == PackageManager.PERMISSION_DENIED) {

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 import com.wangzh.vultr.others.constants.ConstValues;
@@ -28,6 +29,7 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        LeakCanary.install(this);
         CrashCat.getInstance(getApplicationContext(), Environment.getExternalStorageDirectory().getPath()+ ConstValues.FILE_ROOT_DIRECTORY,ConstValues.FILE_LOG);
         Utils.init(getApplicationContext());
         CrashReport.initCrashReport(getApplicationContext(), "f2ef6e3ee0", true);
