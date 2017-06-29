@@ -118,6 +118,9 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
             case ConstValues.OPERATE_RESTART_SERVER_SUCCESS:
                 Toasty.success(this,"Restart Server Success!", Toast.LENGTH_SHORT,true).show();
                 break;
+            case ConstValues.OPERATE_REINSTALL_SERVER_SUCCESS:
+                Toasty.success(this,"Reinstall Server Success!", Toast.LENGTH_SHORT,true).show();
+                break;
         }
     }
 }

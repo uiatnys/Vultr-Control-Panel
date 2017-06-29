@@ -13,4 +13,5 @@ public interface RequestType {
     String REQUESTTYPE_OPERATEBACKUP = "operatebackup";
     String REQUESTTYPE_STOPSERVER = "stopserver";
     String REQUESTTYPE_RESTARTSERVER = "restartserver";
+    String REQUESTTRPE_REINSTALLSERVER = "reinstallserver";
 }

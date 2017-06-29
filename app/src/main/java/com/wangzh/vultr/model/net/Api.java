@@ -51,4 +51,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("v1/server/reboot")
     Observable<Object> restartServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
+
+    @FormUrlEncoded
+    @POST("/v1/server/reinstall")
+    Observable<Object> reinstallServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
 }

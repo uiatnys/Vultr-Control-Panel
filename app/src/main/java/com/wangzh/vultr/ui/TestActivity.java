@@ -2,11 +2,13 @@ package com.wangzh.vultr.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.wangzh.vultr.R;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,11 +27,8 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
         ButterKnife.bind(this);
-        mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                return false;
-            }
-        });
     }
+
+
+
 }

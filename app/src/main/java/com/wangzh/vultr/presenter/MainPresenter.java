@@ -251,4 +251,26 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
             }
         });
     }
+
+    public void reinstallMineVps(Context context,String subid,String apikey){
+        showProgressDialog(R.layout.layout_progress);
+        addSubscribe(mApiWithJson.reinstallServer(subid,apikey),new CallBack<Object>(mProgressDialog){
+
+            @Override
+            public void onSuccess(Object o) {
+                view.onOperateServerSuccess(ConstValues.OPERATE_REINSTALL_SERVER_SUCCESS);
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTRPE_REINSTALLSERVER);
+                view.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                view.onFinish();
+            }
+        });
+    }
 }

@@ -219,6 +219,9 @@ public abstract class BaseMainActivity extends BasePresenterActivity
             case REQUESTTYPE_RESTARTSERVER:
                 Toasty.error(this,"Restart Service error!",Toast.LENGTH_LONG,true).show();
                 break;
+            case REQUESTTRPE_REINSTALLSERVER:
+                Toasty.error(this,"Reinstall Service error!",Toast.LENGTH_LONG,true).show();
+                break;
             case REQUESTTYPE_GETAUTHINFO:
                 break;
         }

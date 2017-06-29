@@ -31,4 +31,5 @@ public class ConstValues {
 
     public static final int OPERATE_STOP_SERVER_SUCCESS = 100;
     public static final int OPERATE_RESTART_SERVER_SUCCESS = 101;
+    public static final int OPERATE_REINSTALL_SERVER_SUCCESS = 102;
 }
