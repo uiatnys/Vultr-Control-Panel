@@ -1,14 +1,15 @@
 package com.wangzh.vultr.ui;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import com.wangzh.vultr.ui.fragment.MineAppFragment;
 import com.wangzh.vultr.ui.fragment.SupportedAppFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -43,8 +45,6 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
@@ -93,6 +93,16 @@ public abstract class BaseMainActivity extends BasePresenterActivity
 
     protected void setBackPressedListener(OnBackPressedListsner listener){
         this.mOnBackPressedListsner = listener;
+    }
+
+    @OnClick({R.id.fab})
+    void OnClicked(View view){
+        switch (view.getId()){
+            case R.id.fab:
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+        }
     }
 
     @Override

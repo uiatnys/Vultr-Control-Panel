@@ -1,8 +1,6 @@
 package com.wangzh.vultr.ui;
 
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +31,6 @@ public class MainActivity extends BaseMainActivity implements AlertDialogBuilder
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
