@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -39,7 +43,7 @@ import butterknife.ButterKnife;
 public class MineAppFragment extends BaseFragment
         implements SwipeRefreshLayout.OnRefreshListener
         ,AnimatedSvgView.OnStateChangeListener
-        ,BaseQuickAdapter.OnItemClickListener,OnBackPressedListsner {
+        ,BaseQuickAdapter.OnItemClickListener,OnBackPressedListsner{
 
     @BindView(R.id.srl_list)
     SwipeRefreshLayout mSrl;
@@ -56,6 +60,10 @@ public class MineAppFragment extends BaseFragment
     private ViewStubHolder mViewStubHolder;
 
     private MineVpsDataVO currentMineVpsVo;
+
+    private boolean isShowdetail = false;
+    private int animYDistance;
+    private final int animDuration = 500;
 
     @Override
     int getRootView() {
@@ -130,12 +138,92 @@ public class MineAppFragment extends BaseFragment
         }
         this.currentMineVpsVo = mMineVpsDataVOs.get(position);
         mScrollView = (ScrollView) mRootView.findViewById(R.id.ll_mineapp_container);
-        mViewStub.setVisibility(View.VISIBLE);
-        mScrollView.setVisibility(View.VISIBLE);
+        startAnimation(true);
+        /*  mScrollView.setVisibility(View.VISIBLE);
         mScrollView.scrollTo(0,0);
-        mSrl.setVisibility(View.GONE);
+        mSrl.setVisibility(View.GONE);*/
         initDetailData(currentMineVpsVo);
         ((MainActivity)mActivity).inflateMenuOption(R.menu.menu_mineapp);
+    }
+
+    public void startAnimation(boolean isShowDetail){
+        this.isShowdetail = isShowDetail;
+        animYDistance = mSrl.getMeasuredHeight()/5;
+        if (isShowDetail){
+            startListAnimation();
+        }else {
+            startDetailAnimation();
+        }
+    }
+
+    public void startDetailAnimation(){
+        AnimationSet detailAnimSet;
+        TranslateAnimation detailTransAnim;
+        AlphaAnimation detailAlphaAnim;
+        if (isShowdetail){
+            mScrollView.setVisibility(View.VISIBLE);
+            detailAnimSet = new AnimationSet(true);
+            detailTransAnim = new TranslateAnimation(mScrollView.getX(),mScrollView.getX(),mScrollView.getY()+animYDistance,mScrollView.getY());
+            detailTransAnim.setDuration(animDuration);
+            detailAlphaAnim = new AlphaAnimation(0,1);
+            detailAlphaAnim.setDuration(animDuration);
+            detailAnimSet.addAnimation(detailTransAnim);
+            detailAnimSet.addAnimation(detailAlphaAnim);
+            mScrollView.startAnimation(detailAnimSet);
+            detailAnimSet.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mScrollView.setAlpha(1);
+                    mScrollView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+    }
+
+    public void startListAnimation(){
+        AnimationSet listAnimSet;
+        TranslateAnimation listTransAnim;
+        AlphaAnimation listAlphaAnim;
+        if (isShowdetail){
+            mSrl.setAlpha(1);
+            listAnimSet = new AnimationSet(true);
+            listTransAnim = new TranslateAnimation(mSrl.getX(),mSrl.getX(),mSrl.getY(),mSrl.getY()+animYDistance);
+            listTransAnim.setDuration(animDuration);
+            listAlphaAnim = new AlphaAnimation(1,0);
+            listAlphaAnim.setDuration(animDuration);
+            listAnimSet.addAnimation(listTransAnim);
+            listAnimSet.addAnimation(listAlphaAnim);
+            mSrl.startAnimation(listAnimSet);
+            listAnimSet.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mSrl.setVisibility(View.GONE);
+                    startDetailAnimation();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+        }else {
+
+        }
     }
 
     public MineVpsDataVO getCurrentVo(){
