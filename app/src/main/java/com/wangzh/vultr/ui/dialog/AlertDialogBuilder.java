@@ -72,6 +72,36 @@ public class AlertDialogBuilder{
         return dialog;
     }
 
+    public AlertDialog createDialogStyleB(Context context, String message,final String text){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        mBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok",null)
+                .setNegativeButton("Cancel",null);
+        AlertDialog dialog = mBuilder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialogInterface) {
+                Button negativeBtn = ((AlertDialog)dialogInterface).getButton(AlertDialog.BUTTON_NEGATIVE);
+                negativeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                Button positiveBtn = ((AlertDialog)dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mListener.onOkBtnClicked(text);
+                        dialogInterface.dismiss();
+                    }
+                });
+            }
+        });
+        return dialog;
+    }
+
     public interface AlertDialogOkClickListener{
         void onOkBtnClicked(String value);
     }

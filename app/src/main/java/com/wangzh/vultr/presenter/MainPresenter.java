@@ -273,4 +273,27 @@ public class MainPresenter extends BasePresenter<MainViewI> implements RequestTy
             }
         });
     }
+
+    public void destroyMineVps(Context context,String subid,String apikey){
+        showProgressDialog(R.layout.layout_progress);
+        addSubscribe(mApiWithJson.destroyServer(subid,apikey),new CallBack<Object>(mProgressDialog){
+
+            @Override
+            public void onSuccess(Object o) {
+                view.onOperateServerSuccess(ConstValues.OPERATE_DESTROY_SERVER_SUCCESS);
+            }
+
+            @Override
+            public void onFail(HttpErrorVo msg) {
+                msg.setType(REQUESTTYPE_DESTROYSERVER);
+                view.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                view.onFinish();
+            }
+        });
+    }
+
 }

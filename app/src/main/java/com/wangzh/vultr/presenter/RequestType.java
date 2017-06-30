@@ -14,4 +14,5 @@ public interface RequestType {
     String REQUESTTYPE_STOPSERVER = "stopserver";
     String REQUESTTYPE_RESTARTSERVER = "restartserver";
     String REQUESTTRPE_REINSTALLSERVER = "reinstallserver";
+    String REQUESTTYPE_DESTROYSERVER = "destroyserver";
 }

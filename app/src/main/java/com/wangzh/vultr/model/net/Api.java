@@ -55,4 +55,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("/v1/server/reinstall")
     Observable<Object> reinstallServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
+
+    @FormUrlEncoded
+    @POST("/v1/server/destroy")
+    Observable<Object> destroyServer(@Field("SUBID") String subid,@Header("API-Key") String apiley);
 }

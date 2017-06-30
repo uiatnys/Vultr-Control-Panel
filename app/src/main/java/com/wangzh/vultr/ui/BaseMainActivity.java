@@ -111,8 +111,20 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 mMainPresenter.restartMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
                 return true;
             case R.id.action_reinstall:
+                new AlertDialogBuilder(new AlertDialogBuilder.AlertDialogOkClickListener() {
+                    @Override
+                    public void onOkBtnClicked(String value) {
+                        mMainPresenter.reinstallMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
+                    }
+                }).createDialogStyleB(mActivity,"Are Sure Reinstall OS?","").show();
                 return true;
             case R.id.action_destroy:
+                new AlertDialogBuilder(new AlertDialogBuilder.AlertDialogOkClickListener() {
+                    @Override
+                    public void onOkBtnClicked(String value) {
+                        mMainPresenter.destroyMineVps(BaseMainActivity.this,mineAppFragment.getCurrentVo().getSUBID(),getApiKey());
+                    }
+                }).createDialogStyleB(mActivity,"Are Sure Destroy OS?","").show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -221,6 +233,9 @@ public abstract class BaseMainActivity extends BasePresenterActivity
                 break;
             case REQUESTTRPE_REINSTALLSERVER:
                 Toasty.error(this,"Reinstall Service error!",Toast.LENGTH_LONG,true).show();
+                break;
+            case REQUESTTYPE_DESTROYSERVER:
+                Toasty.error(this,"Destroy Service error!",Toast.LENGTH_LONG,true).show();
                 break;
             case REQUESTTYPE_GETAUTHINFO:
                 break;
